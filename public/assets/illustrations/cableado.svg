@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-label="Ilustración técnica de cableado y panel de red">
+<rect x="120" y="162" width="660" height="130" rx="18" fill="#142d42" stroke="#7194aa" stroke-width="3"/>
+<rect x="138" y="180" width="624" height="94" rx="10" fill="#1e4058"/>
+<g fill="#081b2b" stroke="#79a0b5" stroke-width="2"><rect x="175" y="203" width="54" height="46" rx="5"/><rect x="251" y="203" width="54" height="46" rx="5"/><rect x="327" y="203" width="54" height="46" rx="5"/><rect x="403" y="203" width="54" height="46" rx="5"/><rect x="479" y="203" width="54" height="46" rx="5"/><rect x="555" y="203" width="54" height="46" rx="5"/><rect x="631" y="203" width="54" height="46" rx="5"/></g>
+<path d="M202 245v64c0 75 35 101 124 101h56M278 245v77c0 46 12 65 80 65h26M354 245v65c0 36 73 61 120 61h49M430 245v78c0 45 30 57 57 57h46M506 245v64c0 64 69 68 86 68" fill="none" stroke="#146fe0" stroke-width="12" stroke-linecap="round"/>
+<path d="M202 245v64c0 75 35 101 124 101h56M354 245v65c0 36 73 61 120 61h49" fill="none" stroke="#3cd5cf" stroke-width="3" stroke-linecap="round"/>
+<circle cx="389" cy="410" r="16" fill="#102439" stroke="#3cd5cf" stroke-width="4"/><circle cx="533" cy="380" r="16" fill="#102439" stroke="#3cd5cf" stroke-width="4"/><circle cx="601" cy="376" r="16" fill="#102439" stroke="#3cd5cf" stroke-width="4"/>
+</svg>
