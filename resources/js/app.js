@@ -22,9 +22,9 @@ if (menuToggle && mainNav) {
 const showcase = document.querySelector('[data-showcase]');
 if (showcase) {
     const modes = {
-        redes: { title: 'Redes empresariales', copy: 'Conecta áreas, equipos y usuarios con una arquitectura pensada para crecer.', image: '/assets/illustrations/switch.svg', alt: 'Ilustración de un switch empresarial genérico', quote: '/cotizar?categoria=redes' },
-        wifi: { title: 'Cobertura Wi-Fi', copy: 'Planifica la conectividad inalámbrica según espacios, usuarios y demanda.', image: '/assets/illustrations/wifi.svg', alt: 'Ilustración de un punto de acceso Wi-Fi genérico', quote: '/cotizar?categoria=wifi' },
-        seguridad: { title: 'Seguridad perimetral', copy: 'Define el enrutamiento y los controles de acceso para tu operación.', image: '/assets/illustrations/firewall.svg', alt: 'Ilustración de router y firewall genéricos', quote: '/cotizar?categoria=seguridad' },
+        redes: { title: 'Redes empresariales', copy: 'Conecta áreas, equipos y usuarios con una arquitectura pensada para crecer.', image: '/assets/catalog/switch.webp', alt: 'Representación conceptual de un switch empresarial genérico', quote: '/cotizar?categoria=redes' },
+        wifi: { title: 'Cobertura Wi-Fi', copy: 'Planifica la conectividad inalámbrica según espacios, usuarios y demanda.', image: '/assets/catalog/wifi.webp', alt: 'Representación conceptual de un punto de acceso Wi-Fi genérico', quote: '/cotizar?categoria=wifi' },
+        seguridad: { title: 'Seguridad perimetral', copy: 'Define el enrutamiento y los controles de acceso para tu operación.', image: '/assets/catalog/firewall.webp', alt: 'Representación conceptual de un firewall genérico', quote: '/cotizar?categoria=seguridad' },
     };
     const buttons = [...showcase.querySelectorAll('.experience-tab')];
     const image = showcase.querySelector('[data-stage-image]');
@@ -59,10 +59,10 @@ if (showcase) {
             copy.textContent = data.copy;
             quote.href = data.quote;
             quote.setAttribute('aria-label', `Cotizar ${data.title.toLowerCase()}`);
-            if (!reduceMotion.matches) gsap.fromTo(image, { opacity: 0, y: 20, scale: .96 }, { opacity: 1, y: 0, scale: 1, duration: .55, ease: 'power2.out' });
+            if (!reduceMotion.matches) gsap.fromTo(image, { opacity: 0 }, { opacity: 1, duration: .55, ease: 'power2.out' });
         };
         if (reduceMotion.matches) swap();
-        else gsap.to(image, { opacity: 0, y: -12, duration: .18, onComplete: swap });
+        else gsap.to(image, { opacity: 0, duration: .18, onComplete: swap });
     };
     const stopAuto = () => { clearInterval(timer); timer = undefined; };
     const startAuto = () => {
@@ -104,6 +104,91 @@ if (showcase) {
 
 const catalog = document.querySelector('[data-catalog-grid]');
 if (catalog) {
+    const feature = document.querySelector('[data-catalog-feature]');
+    const tabs = [...feature.querySelectorAll('[data-feature-tab]')];
+    const featureImage = feature.querySelector('[data-feature-image]');
+    const featureTitle = feature.querySelector('[data-feature-title]');
+    const featureCopy = feature.querySelector('[data-feature-copy]');
+    const featureGroup = feature.querySelector('[data-feature-group]');
+    const featureIndex = feature.querySelector('[data-feature-index]');
+    const featurePanel = feature.querySelector('[role="tabpanel"]');
+    const featureVisual = feature.querySelector('[data-feature-visual]');
+    const featureAdd = feature.querySelector('[data-quote-item]');
+    let activeFeature = 0;
+    let featureTimer;
+    let featureVisible = false;
+    let featureInteracted = false;
+    const stopFeature = () => { clearInterval(featureTimer); featureTimer = undefined; };
+    const showFeature = (index, focus = false) => {
+        const next = (index + tabs.length) % tabs.length;
+        if (next === activeFeature && !focus) return;
+        activeFeature = next;
+        const tab = tabs[next];
+        feature.dataset.active = tab.dataset.featureTab;
+        tabs.forEach((item, i) => {
+            const active = i === next;
+            item.classList.toggle('is-active', active);
+            item.setAttribute('aria-selected', String(active));
+            item.tabIndex = active ? 0 : -1;
+        });
+        featurePanel.setAttribute('aria-labelledby', tab.id);
+        featureIndex.textContent = String(next + 1).padStart(2, '0');
+        const update = () => {
+            featureImage.src = tab.dataset.featureImageSrc;
+            featureImage.alt = `Representación conceptual de ${tab.dataset.featureName.toLowerCase()}`;
+            featureTitle.textContent = tab.dataset.featureName;
+            featureCopy.textContent = tab.dataset.featureSummary;
+            featureGroup.textContent = `${tab.dataset.featureGroupName} / ${String(next + 1).padStart(2, '0')}`;
+            featureAdd.dataset.quoteItem = tab.dataset.featureTab;
+            featureAdd.dispatchEvent(new Event('catalog:selection-sync'));
+            if (!reduceMotion.matches) gsap.fromTo(featureImage, { opacity: 0 }, { opacity: 1, duration: .65, ease: 'power3.out', overwrite: true });
+        };
+        gsap.killTweensOf(featureImage);
+        if (reduceMotion.matches) update();
+        else gsap.to(featureImage, { opacity: 0, duration: .2, ease: 'power2.in', onComplete: update });
+        if (focus) tab.focus();
+        if (featureInteracted || focus) tab.scrollIntoView({ behavior: reduceMotion.matches ? 'instant' : 'smooth', block: 'nearest', inline: 'center' });
+    };
+    const startFeature = () => {
+        stopFeature();
+        if (featureInteracted || !featureVisible || reduceMotion.matches || document.hidden) return;
+        featureTimer = setInterval(() => showFeature(activeFeature + 1), 6500);
+    };
+    const chooseFeature = (index, focus = false) => { featureInteracted = true; stopFeature(); showFeature(index, focus); };
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => chooseFeature(index));
+        tab.addEventListener('keydown', event => {
+            if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : activeFeature + (event.key === 'ArrowRight' ? 1 : -1);
+            chooseFeature(next, true);
+        });
+    });
+    feature.querySelector('[data-feature-prev]').addEventListener('click', () => chooseFeature(activeFeature - 1));
+    feature.querySelector('[data-feature-next]').addEventListener('click', () => chooseFeature(activeFeature + 1));
+    let touchX;
+    featurePanel.addEventListener('touchstart', event => { touchX = event.changedTouches[0]?.clientX; }, { passive: true });
+    featurePanel.addEventListener('touchend', event => {
+        if (touchX === undefined) return;
+        const distance = event.changedTouches[0].clientX - touchX;
+        touchX = undefined;
+        if (Math.abs(distance) > 45) chooseFeature(activeFeature + (distance < 0 ? 1 : -1));
+    }, { passive: true });
+    featureVisual.addEventListener('pointermove', event => {
+        if (reduceMotion.matches || event.pointerType === 'touch') return;
+        const rect = featureVisual.getBoundingClientRect();
+        featureVisual.style.setProperty('--move-x', `${((event.clientX - rect.left) / rect.width - .5) * 22}px`);
+        featureVisual.style.setProperty('--move-y', `${((event.clientY - rect.top) / rect.height - .5) * 16}px`);
+    });
+    featureVisual.addEventListener('pointerleave', () => { featureVisual.style.setProperty('--move-x', '0px'); featureVisual.style.setProperty('--move-y', '0px'); });
+    feature.addEventListener('mouseenter', stopFeature);
+    feature.addEventListener('mouseleave', startFeature);
+    feature.addEventListener('focusin', stopFeature);
+    feature.addEventListener('focusout', event => { if (!feature.contains(event.relatedTarget)) startFeature(); });
+    document.addEventListener('visibilitychange', startFeature);
+    reduceMotion.addEventListener('change', startFeature);
+    new IntersectionObserver(([entry]) => { featureVisible = entry.isIntersecting; if (featureVisible) startFeature(); else stopFeature(); }, { threshold: .3 }).observe(feature);
+
     const filters = [...document.querySelectorAll('[data-filter]')];
     const search = document.querySelector('[data-catalog-search]');
     const cards = [...catalog.querySelectorAll('.catalog-card')];
@@ -131,8 +216,15 @@ if (catalog) {
     }));
     search.addEventListener('input', apply);
 
-    const itemButtons = [...catalog.querySelectorAll('[data-quote-item]')];
-    const allowed = itemButtons.map(button => button.dataset.quoteItem);
+    catalog.querySelectorAll('[data-feature-open]').forEach(button => button.addEventListener('click', () => {
+        const index = tabs.findIndex(tab => tab.dataset.featureTab === button.dataset.featureOpen);
+        if (index < 0) return;
+        chooseFeature(index);
+        feature.scrollIntoView({ behavior: reduceMotion.matches ? 'instant' : 'smooth', block: 'center' });
+    }));
+
+    const itemButtons = [...catalog.querySelectorAll('[data-quote-item]'), featureAdd];
+    const allowed = [...new Set(itemButtons.map(button => button.dataset.quoteItem))];
     const dock = document.querySelector('[data-quote-dock]');
     const dockCount = dock.querySelector('[data-quote-count]');
     const dockLink = dock.querySelector('[data-quote-go]');
@@ -142,7 +234,8 @@ if (catalog) {
         itemButtons.forEach(button => {
             const active = selected.includes(button.dataset.quoteItem);
             button.setAttribute('aria-pressed', String(active));
-            button.textContent = active ? 'Quitar de solicitud −' : 'Añadir a solicitud +';
+            if (button === featureAdd) button.innerHTML = active ? 'Quitar de solicitud <span aria-hidden="true">−</span>' : 'Añadir a solicitud <span aria-hidden="true">↗</span>';
+            else button.innerHTML = active ? 'Quitar <span aria-hidden="true">−</span>' : 'Añadir <span aria-hidden="true">+</span>';
         });
         dock.hidden = selected.length === 0;
         dockCount.textContent = String(selected.length);
@@ -156,6 +249,7 @@ if (catalog) {
         selected = selected.includes(item) ? selected.filter(value => value !== item) : [...selected, item];
         renderSelection();
     }));
+    featureAdd.addEventListener('catalog:selection-sync', renderSelection);
     dock.querySelector('[data-quote-clear]').addEventListener('click', () => { selected = []; renderSelection(); });
     renderSelection();
 }

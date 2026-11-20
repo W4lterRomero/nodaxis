@@ -24,8 +24,8 @@ El comando pide nombre, correo y contraseña de al menos 12 caracteres. La cuent
 
 - Portada responsiva con explorador de soluciones: cambio automático, pestañas, teclado, gesto lateral en móvil y pausa cuando el usuario interactúa o sale de la vista.
 - Animaciones de entrada y diagrama de red; respeta la preferencia de movimiento reducido.
-- Ilustraciones SVG dibujadas para este proyecto. Son categorías orientativas, sin marcas, modelos, precios o existencias inventados.
-- Catálogo por categorías con filtro, búsqueda y selección de intereses guardada en el navegador.
+- Escena visual del catálogo con ocho familias, imágenes conceptuales originales, transición entre equipos, movimiento suave al puntero, navegación con flechas, teclado y gesto lateral. Se detiene al interactuar, salir de la vista o solicitar movimiento reducido.
+- Catálogo por categorías con filtro, búsqueda, acceso a la escena de cada familia y selección de intereses guardada en el navegador. No se presentan marcas, modelos, precios ni existencias sin confirmar.
 - Formulario de cotización con categorías e intereses precargados, validación, protección básica contra spam y persistencia en SQLite.
 - Panel comercial privado para consultar solicitudes, filtrar y cambiar su estado.
 
@@ -33,7 +33,7 @@ El comando pide nombre, correo y contraseña de al menos 12 caracteres. La cuent
 
 Esta es una versión local. Las solicitudes se guardan en `database/database.sqlite`; **no se envían correos** ni se sincronizan con WordPress. Antes de publicar se deben confirmar servicios, inventario, cobertura, condiciones comerciales, aviso de privacidad, correo receptor y dominio. El contacto mostrado es `ac23015@ues.edu.sv`, proporcionado para el proyecto.
 
-La identidad usa el logotipo publicado por NODAXIS, DejaVu Sans y los colores `#146FE0`, `#102439`, `#3CD5CF` y blanco. El archivo `public/assets/brand/nodaxis-logo.png` proviene del sitio WordPress existente. Las ilustraciones de equipo están en `public/assets/illustrations/`.
+La identidad usa el logotipo publicado por NODAXIS, DejaVu Sans y los colores `#146FE0`, `#102439`, `#3CD5CF` y blanco. El archivo `public/assets/brand/nodaxis-logo.png` proviene del sitio WordPress existente. Los ocho recortes conceptuales de equipos se generaron para este proyecto y se guardan en `public/assets/catalog/` en formato WebP. Son imágenes orientativas, no fotografías de inventario. Las ilustraciones SVG previas están en `public/assets/illustrations/`.
 
 ## Desarrollo sin Docker
 
@@ -53,4 +53,4 @@ docker compose exec app php artisan test
 docker compose exec vite npm run build
 ```
 
-La estructura principal está en `resources/views/`, `resources/css/site.css`, `resources/js/app.js`, `app/Http/Controllers/` y `database/migrations/`.
+La estructura principal está en `config/catalog.php`, `resources/views/`, `resources/css/catalog.css`, `resources/css/site.css`, `resources/js/app.js`, `app/Http/Controllers/` y `database/migrations/`.

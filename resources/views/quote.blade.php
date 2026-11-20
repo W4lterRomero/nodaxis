@@ -13,12 +13,7 @@
         'soporte' => 'Soporte y mantenimiento',
         'equipos' => 'Equipos',
     ];
-    $interestOptions = [
-        'switches' => 'Switches',
-        'access-points' => 'Puntos de acceso Wi-Fi',
-        'routers-firewalls' => 'Routers y firewalls',
-        'cableado' => 'Cableado y accesorios',
-    ];
+    $interestOptions = collect(config('catalog'))->mapWithKeys(fn ($item, $slug) => [$slug => $item['name']])->all();
     $chosenInterests = old('intereses', $selectedInterests ?? []);
 @endphp
 <section class="quote-hero shell"><a class="back-link" href="{{ url('/') }}">← Volver al inicio</a><p class="eyebrow">Hablemos de tu proyecto</p><h1>Tu siguiente red<br><em>comienza aquí.</em></h1><p>Cuéntanos lo necesario para preparar una propuesta técnica y comercial adaptada a tu espacio.</p></section>

@@ -76,6 +76,15 @@ class QuoteRequestTest extends TestCase
             ->assertViewHas('selectedInterests', ['cableado']);
     }
 
+    public function test_new_catalog_families_are_accepted_in_a_quote(): void
+    {
+        $request = $this->validRequest();
+        $request['intereses'] = ['enlaces-inalambricos', 'racks-gabinetes', 'energia-ups', 'fibra-optica'];
+
+        $this->post(route('quotes.store'), $request)->assertRedirect(route('quotes.create'));
+        $this->assertSame($request['intereses'], QuoteRequest::firstOrFail()->intereses);
+    }
+
     public function test_sixth_submission_from_same_client_is_rate_limited(): void
     {
         for ($attempt = 0; $attempt < 5; $attempt++) {

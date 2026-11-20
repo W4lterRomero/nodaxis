@@ -10,8 +10,6 @@ use Illuminate\Validation\Rule;
 
 class QuoteRequestController extends Controller
 {
-    private const INTERESTS = ['switches', 'access-points', 'routers-firewalls', 'cableado'];
-
     public function create(Request $request): View
     {
         $requested = $request->query('intereses', []);
@@ -19,7 +17,7 @@ class QuoteRequestController extends Controller
         $requested = array_filter($requested, 'is_string');
 
         return view('quote', [
-            'selectedInterests' => array_values(array_unique(array_intersect(self::INTERESTS, $requested))),
+            'selectedInterests' => array_values(array_unique(array_intersect(array_keys(config('catalog')), $requested))),
         ]);
     }
 
@@ -36,8 +34,8 @@ class QuoteRequestController extends Controller
             'categorias.*' => ['required', 'string', 'distinct', Rule::in([
                 'redes', 'wifi', 'seguridad', 'cableado', 'soporte', 'equipos',
             ])],
-            'intereses' => ['sometimes', 'array', 'max:4'],
-            'intereses.*' => ['required', 'string', 'distinct', Rule::in(self::INTERESTS)],
+            'intereses' => ['sometimes', 'array', 'max:8'],
+            'intereses.*' => ['required', 'string', 'distinct', Rule::in(array_keys(config('catalog')))],
             'website' => ['nullable', 'prohibited'],
         ]);
 
