@@ -13,21 +13,22 @@
 <header class="site-header" id="inicio">
     <div class="header-inner shell">
         <a class="brand" href="{{ url('/') }}" aria-label="NODAXIS, ir a inicio"><img src="{{ asset('assets/brand/nodaxis-logo.png') }}" alt="NODAXIS, ingeniería de redes" width="180" height="54"></a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span><span></span><span></span></button>
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-            <a href="{{ url('/#soluciones') }}">Soluciones</a>
-            <a href="{{ url('/#catalogo') }}">Equipos</a>
-            <a href="{{ url('/#servicios') }}">Servicios</a>
-            <a href="{{ url('/#nosotros') }}">Nosotros</a>
-            <a class="nav-cta" href="{{ url('/cotizar') }}">Solicitar cotización</a>
+            <a data-nav-link href="{{ url('/#soluciones') }}">Soluciones</a>
+            <a data-nav-link href="{{ url('/#arquitectura') }}">Arquitectura</a>
+            <a data-nav-link href="{{ url('/#catalogo') }}">Equipos</a>
+            <a data-nav-link href="{{ url('/#servicios') }}">Servicios</a>
+            <a data-nav-link href="{{ url('/#nosotros') }}">Nosotros</a>
         </nav>
+        <div class="header-actions"><span class="header-region">El Salvador</span><a class="nav-cta" href="{{ url('/cotizar') }}">Cotizar <span aria-hidden="true">↗</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span><span></span><span></span></button></div>
     </div>
+    <div class="header-progress" aria-hidden="true"><span data-scroll-progress></span></div>
 </header>
 <main id="contenido">@yield('content')</main>
 <footer class="site-footer">
     <div class="shell footer-grid">
         <div><img class="footer-logo" src="{{ asset('assets/brand/nodaxis-logo.png') }}" alt="NODAXIS" width="180" height="54"><p>Ingeniería de redes para empresas e instituciones en El Salvador.</p></div>
-        <div><p class="footer-title">Explorar</p><a href="{{ url('/#soluciones') }}">Soluciones</a><a href="{{ url('/#catalogo') }}">Equipos</a><a href="{{ url('/#servicios') }}">Servicios</a></div>
+        <div><p class="footer-title">Explorar</p><a href="{{ url('/#soluciones') }}">Soluciones</a><a href="{{ url('/#arquitectura') }}">Arquitectura</a><a href="{{ url('/#catalogo') }}">Equipos</a><a href="{{ url('/#servicios') }}">Servicios</a></div>
         <div><p class="footer-title">Contacto</p><a href="{{ url('/cotizar') }}">Solicitar cotización</a><a href="mailto:ac23015@ues.edu.sv">ac23015@ues.edu.sv</a><p>El Salvador</p></div>
     </div>
     <div class="shell footer-bottom"><span>© {{ date('Y') }} NODAXIS. Conectamos el futuro.</span><span>Prototipo local · productos sujetos a confirmación</span></div>

@@ -1,14 +1,23 @@
 @extends('layouts.site')
 
 @section('content')
-<section class="hero shell" aria-labelledby="hero-title">
-    <div class="hero-copy" data-reveal>
-        <p class="eyebrow"><span class="eyebrow-line"></span> Ingeniería de redes · El Salvador</p>
-        <h1 id="hero-title">Una red que<br><em>impulsa</em> tu operación.</h1>
-        <p class="hero-intro">Conectividad, seguridad y soporte para empresas e instituciones. Explora una solución, define lo que necesitas y solicita una propuesta clara.</p>
-        <div class="hero-actions"><a class="button button-primary" href="{{ url('/cotizar') }}">Solicitar cotización</a><a class="text-link" href="#soluciones">Explorar soluciones <span aria-hidden="true">↓</span></a></div>
-        <div class="hero-note"><span class="note-mark" aria-hidden="true"></span><span>Diseño según el alcance real de cada proyecto.</span></div>
+<section class="hero-cinema" aria-labelledby="hero-title">
+    <video class="hero-video" data-hero-video autoplay muted loop playsinline preload="metadata" poster="{{ asset('assets/motion/network-cables-poster.jpg') }}" aria-hidden="true"><source src="{{ asset('assets/motion/network-cables.mp4') }}" type="video/mp4"></video>
+    <div class="hero-cinema-shade" aria-hidden="true"></div>
+    <div class="hero-cinema-inner shell">
+        <div class="hero-copy" data-reveal>
+            <p class="eyebrow"><span class="eyebrow-line"></span> Ingeniería de redes · El Salvador</p>
+            <h1 id="hero-title">Una red que<br><em>impulsa</em> tu operación.</h1>
+            <p class="hero-intro">Diseño, conectividad y seguridad para empresas e instituciones. Cuéntanos qué necesita tu operación y construyamos una propuesta clara.</p>
+            <div class="hero-actions"><a class="button button-primary" href="{{ url('/cotizar') }}">Solicitar cotización <span aria-hidden="true">↗</span></a><a class="hero-secondary" href="#experiencia">Explorar soluciones <span aria-hidden="true">↓</span></a></div>
+        </div>
+        <div class="hero-cinema-foot"><span>01 / NODAXIS</span><span>Infraestructura pensada para tu proyecto</span><a href="#experiencia" aria-label="Ir a explorador de soluciones">Desliza para explorar ↓</a></div>
     </div>
+</section>
+
+<section class="showcase-section section-space" id="experiencia" aria-labelledby="showcase-title">
+    <div class="shell">
+    <div class="showcase-heading" data-reveal><p class="eyebrow">Un sistema. Varias necesidades.</p><h2 id="showcase-title">Conecta lo que importa.</h2><p>Explora cómo se relacionan redes, Wi-Fi y seguridad. Cada propuesta se define según la ubicación y el alcance real del proyecto.</p></div>
     <div class="hero-experience" data-reveal data-showcase aria-label="Explorador de soluciones">
         <div class="experience-head"><span class="micro-label">EXPLORA NODAXIS</span><span class="live-indicator"><i aria-hidden="true"></i> Vista interactiva</span></div>
         <div class="experience-tabs" role="tablist" aria-label="Tipo de solución">
@@ -26,6 +35,7 @@
         <div class="experience-detail"><div><span class="micro-label">SOLUCIÓN EXPLORADA</span><h2 data-stage-title>Redes empresariales</h2><p data-stage-copy>Conecta áreas, equipos y usuarios con una arquitectura pensada para crecer.</p></div><a data-stage-link href="{{ url('/cotizar?categoria=redes') }}" aria-label="Cotizar redes empresariales">Cotizar <span aria-hidden="true">↗</span></a></div>
         <div class="experience-progress" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
     </div>
+    </div>
 </section>
 
 <div class="section-divider shell" aria-hidden="true"><span></span><span>01 / SOLUCIONES</span></div>
@@ -40,9 +50,19 @@
     </div>
 </section>
 
-<section class="architecture section-space" aria-labelledby="architecture-title">
-    <div class="shell architecture-layout"><div class="architecture-copy" data-reveal><p class="eyebrow">Pensado como sistema</p><h2 id="architecture-title">Más que conectar equipos: conectar decisiones.</h2><p>Partimos de la ubicación, la cantidad de usuarios y los objetivos de tu operación. Con esa información se plantea una arquitectura y un alcance de implementación.</p><a class="text-link" href="{{ url('/cotizar') }}">Iniciar una conversación <span aria-hidden="true">↗</span></a></div>
-        <div class="network-map" aria-label="Diagrama ilustrativo de una red que conecta sede, usuarios y seguridad" data-reveal><div class="map-label">VISTA DE ARQUITECTURA</div><svg viewBox="0 0 600 360" aria-hidden="true" preserveAspectRatio="xMidYMid meet"><path class="map-line" d="M300 172 L115 88 M300 172 L490 88 M300 172 L116 278 M300 172 L490 278"/><path class="map-pulse" d="M300 172 L490 88"/><path class="map-pulse map-pulse-delay" d="M300 172 L116 278"/></svg><div class="map-node map-center"><span>CORE</span><b>N</b></div><div class="map-node map-n1"><span>01</span><b>Sede</b></div><div class="map-node map-n2"><span>02</span><b>Wi-Fi</b></div><div class="map-node map-n3"><span>03</span><b>Equipos</b></div><div class="map-node map-n4"><span>04</span><b>Control</b></div><div class="map-caption">Estructura visual orientativa · no representa una instalación real</div></div>
+<section class="architecture hologram-section section-space" id="arquitectura" aria-labelledby="architecture-title">
+    <div class="shell"><div class="hologram-heading" data-reveal><p class="eyebrow">Pensado como sistema</p><h2 id="architecture-title">Una red visible.<br>Una operación conectada.</h2><p>Explora las partes de una arquitectura empresarial. La distribución final se define con los datos de tu espacio y tus usuarios.</p></div>
+        <div class="hologram-stage" data-hologram data-active="sede" aria-label="Explorador interactivo de arquitectura de red">
+            <div class="hologram-visual" aria-hidden="true">@include('partials.network-hologram')</div>
+            <div class="hologram-nodes" role="group" aria-label="Explorar componentes de la red">
+                <button class="hologram-node is-active" type="button" data-holo-node="sede" aria-pressed="true"><span>01</span><b>Sede</b></button>
+                <button class="hologram-node" type="button" data-holo-node="wifi" aria-pressed="false"><span>02</span><b>Wi-Fi</b></button>
+                <button class="hologram-node" type="button" data-holo-node="equipos" aria-pressed="false"><span>03</span><b>Equipos</b></button>
+                <button class="hologram-node" type="button" data-holo-node="control" aria-pressed="false"><span>04</span><b>Control</b></button>
+            </div>
+            <div class="hologram-detail" aria-live="polite"><span class="micro-label" data-holo-index>01 / SEDE</span><h3 data-holo-title>Una base para conectar.</h3><p data-holo-copy>La ubicación y la cantidad de usuarios orientan la distribución de la red.</p><a data-holo-link href="{{ url('/cotizar?categoria=redes') }}">Cotizar esta solución <span aria-hidden="true">↗</span></a></div>
+            <p class="hologram-caption">Visualización orientativa · no representa una instalación real</p>
+        </div>
     </div>
 </section>
 
