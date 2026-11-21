@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import './quote-flow.js';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 

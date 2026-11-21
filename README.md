@@ -28,7 +28,7 @@ El comando pide nombre, correo y contraseña de al menos 12 caracteres. La cuent
 - Topología de red animada e interactiva: Sede, Wi-Fi, Equipos y Control muestran su enfoque y llevan a la cotización correspondiente. Respeta la preferencia de movimiento reducido.
 - Escena visual del catálogo con ocho familias, imágenes conceptuales originales, transición entre equipos, movimiento suave al puntero, navegación con flechas, teclado y gesto lateral. Se detiene al interactuar, salir de la vista o solicitar movimiento reducido.
 - Catálogo por categorías con filtro, búsqueda, acceso a la escena de cada familia y selección de intereses guardada en el navegador. No se presentan marcas, modelos, precios ni existencias sin confirmar.
-- Formulario de cotización con categorías e intereses precargados, validación, protección básica contra spam y persistencia en SQLite.
+- Formulario de cotización guiado en tres pasos con revisión del proyecto, categorías e intereses precargados, validación, protección básica contra spam y persistencia en SQLite. Si JavaScript no carga, todos los campos siguen disponibles y el servidor valida la solicitud.
 - Panel comercial privado para consultar solicitudes, filtrar y cambiar su estado.
 
 ## Alcance y datos
