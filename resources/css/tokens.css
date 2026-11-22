@@ -2,13 +2,12 @@
     color-scheme:light;
     --nodaxis-blue:#146FE0;
     --nodaxis-ink:#102439;
-    --nodaxis-cyan:#3CD5CF;
     --nodaxis-white:#FFFFFF;
     --nodaxis-paper:#F6F9FC;
     --nodaxis-line:#DCE5EF;
     --nodaxis-muted:#53697D;
-    --font-sans:"DejaVu",Arial,sans-serif;
-    --font-mono:ui-monospace,"Cascadia Code","SFMono-Regular",Consolas,monospace;
+    --font-sans:"IBM Plex Sans",sans-serif;
+    --font-mono:"IBM Plex Mono",monospace;
     --text-small:clamp(.8125rem,.78rem + .12vw,.875rem);
     --text-body:clamp(1rem,.96rem + .18vw,1.125rem);
     --text-title:clamp(2.5rem,4.3vw,4.8rem);
@@ -20,3 +19,13 @@
     --motion-fast:220ms;--motion-standard:340ms;
     --ease-standard:cubic-bezier(.2,.7,.2,1);
 }
+body{font-family:var(--font-sans);color:var(--nodaxis-ink)}
+h1,h2,h3{font-weight:500;letter-spacing:-.018em}
+h1{font-size:clamp(2.5rem,4.2vw,4rem);line-height:1.08}
+h2{font-size:clamp(2rem,3vw,3.25rem);line-height:1.12}
+p{font-size:var(--text-body);line-height:1.6;color:#34495A}
+.eyebrow,.micro-label{font-family:var(--font-sans);font-size:var(--text-small);font-weight:500;letter-spacing:0;text-transform:none;color:var(--nodaxis-muted)}
+.hero-cinema h1 em,.hero h1 em,.quote-hero h1 em{font-style:normal;color:inherit}
+.hero-cinema-shade{background:linear-gradient(90deg,#071624d9 0%,#071624a8 38%,#07162428 100%),linear-gradient(0deg,#07162485,transparent 45%)}
+.button,.nav-cta,.filter-pill,.category-option span,.catalog-feature-tab{border-radius:var(--radius-control);box-shadow:none}
+.catalog-feature,.catalog-card,.catalog-dialog,.hologram-stage,.hero-experience{border-radius:var(--radius-panel);box-shadow:none}
