@@ -30,7 +30,7 @@
             <a data-nav-link href="{{ url('/#servicios') }}">Servicios</a>
             <a data-nav-link href="{{ url('/#nosotros') }}">Nosotros</a>
         </nav>
-        <div class="header-actions"><span class="header-region">El Salvador</span><a class="nav-cta" href="{{ url('/cotizar') }}">Cotizar <span aria-hidden="true">↗</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span><span></span><span></span></button></div>
+        <div class="header-actions"><span class="header-region">El Salvador</span><a class="nav-cta" href="{{ url('/cotizar') }}">Cotizar</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><span></span><span></span><span></span></button></div>
     </div>
     <div class="header-progress" aria-hidden="true"><span data-scroll-progress></span></div>
 </header>

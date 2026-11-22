@@ -2,16 +2,18 @@
 
 @section('content')
 <section class="hero-cinema" aria-labelledby="hero-title">
-    <video class="hero-video" data-hero-video autoplay muted loop playsinline preload="metadata" poster="{{ asset('assets/motion/network-cables-poster.jpg') }}" aria-hidden="true"><source src="{{ asset('assets/motion/network-cables.mp4') }}" type="video/mp4"></video>
-    <div class="hero-cinema-shade" aria-hidden="true"></div>
     <div class="hero-cinema-inner shell">
         <div class="hero-copy" data-reveal>
-            <p class="eyebrow"><span class="eyebrow-line"></span> Ingeniería de redes · El Salvador</p>
-            <h1 id="hero-title">Una red que<br><em>impulsa</em> tu operación.</h1>
-            <p class="hero-intro">Diseño, conectividad y seguridad para empresas e instituciones. Cuéntanos qué necesita tu operación y construyamos una propuesta clara.</p>
-            <div class="hero-actions"><a class="button button-primary" href="{{ url('/cotizar') }}">Solicitar cotización <span aria-hidden="true">↗</span></a><a class="hero-secondary" href="#experiencia">Explorar soluciones <span aria-hidden="true">↓</span></a></div>
+            <p class="hero-breadcrumb">Equipos <span aria-hidden="true">/</span> Conectividad</p>
+            <h1 id="hero-title">Switches para redes empresariales</h1>
+            <p class="hero-intro">Conecte áreas, usuarios y servicios. La selección depende de los puertos, la alimentación y el crecimiento que necesita su red.</p>
+            <div class="hero-actions"><a class="button button-primary" href="{{ url('/cotizar?intereses=switches') }}">Cotizar switches</a><a class="hero-secondary" href="#catalogo">Ver catálogo</a></div>
         </div>
-        <div class="hero-cinema-foot"><span>01 / NODAXIS</span><span>Infraestructura pensada para tu proyecto</span><a href="#experiencia" aria-label="Ir a explorador de soluciones">Desliza para explorar ↓</a></div>
+        <figure class="hero-product-scene" data-reveal>
+            <img src="{{ asset('assets/catalog/switch.webp') }}" alt="Imagen conceptual de un switch para redes empresariales" width="1200" height="900" fetchpriority="high">
+            <figcaption>Representación conceptual · modelo sujeto a cotización</figcaption>
+            <span class="hero-product-index" aria-hidden="true">Conectividad / 01</span>
+        </figure>
     </div>
 </section>
 
