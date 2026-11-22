@@ -16,7 +16,17 @@
         <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
             <a data-nav-link href="{{ url('/#soluciones') }}">Soluciones</a>
             <a data-nav-link href="{{ url('/#arquitectura') }}">Arquitectura</a>
-            <a data-nav-link href="{{ url('/#catalogo') }}">Equipos</a>
+            <div class="nav-mega" data-nav-mega>
+                <button class="nav-mega-trigger" type="button" aria-expanded="false" aria-controls="equipment-menu">Equipos <span aria-hidden="true">⌄</span></button>
+                <div class="nav-mega-panel" id="equipment-menu" hidden>
+                    <div class="nav-mega-list" role="group" aria-label="Familias de equipos">
+                        @foreach(config('catalog') as $slug => $item)
+                            <a href="{{ url('/cotizar?intereses='.$slug) }}" data-mega-item="{{ $slug }}" data-mega-name="{{ $item['name'] }}" data-mega-summary="{{ $item['summary'] }}" data-mega-image="{{ asset('assets/catalog/'.$item['image']) }}">{{ $item['name'] }}</a>
+                        @endforeach
+                    </div>
+                    <div class="nav-mega-preview" aria-live="polite"><img src="{{ asset('assets/catalog/switch.webp') }}" alt="Representación conceptual de switches" data-mega-preview-image><div><span class="micro-label">EXPLORAR EQUIPOS</span><h2 data-mega-preview-title>Switches</h2><p data-mega-preview-copy>Puertos y capacidad para conectar áreas, usuarios y servicios.</p><a href="{{ url('/#catalogo') }}">Ver catálogo</a></div></div>
+                </div>
+            </div>
             <a data-nav-link href="{{ url('/#servicios') }}">Servicios</a>
             <a data-nav-link href="{{ url('/#nosotros') }}">Nosotros</a>
         </nav>

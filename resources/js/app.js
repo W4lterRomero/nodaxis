@@ -7,6 +7,24 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const menuToggle = document.querySelector('.menu-toggle');
 const mainNav = document.querySelector('.main-nav');
 const header = document.querySelector('.site-header');
+const mega = document.querySelector('[data-nav-mega]');
+if (mega) {
+    const trigger = mega.querySelector('.nav-mega-trigger');
+    const panel = mega.querySelector('.nav-mega-panel');
+    const image = mega.querySelector('[data-mega-preview-image]');
+    const title = mega.querySelector('[data-mega-preview-title]');
+    const copy = mega.querySelector('[data-mega-preview-copy]');
+    const close = () => { trigger.setAttribute('aria-expanded', 'false'); panel.hidden = true; };
+    const open = () => { trigger.setAttribute('aria-expanded', 'true'); panel.hidden = false; };
+    trigger.addEventListener('click', () => trigger.getAttribute('aria-expanded') === 'true' ? close() : open());
+    mega.querySelectorAll('[data-mega-item]').forEach(item => {
+        const preview = () => { image.src = item.dataset.megaImage; image.alt = `Representación conceptual de ${item.dataset.megaName}`; title.textContent = item.dataset.megaName; copy.textContent = item.dataset.megaSummary; };
+        item.addEventListener('mouseenter', preview);
+        item.addEventListener('focus', preview);
+    });
+    document.addEventListener('click', event => { if (!mega.contains(event.target)) close(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && !panel.hidden) { close(); trigger.focus(); } });
+}
 if (menuToggle && mainNav) {
     const setMenu = open => {
         menuToggle.setAttribute('aria-expanded', String(open));
