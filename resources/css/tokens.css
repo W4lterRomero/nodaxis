@@ -1,0 +1,22 @@
+:root{
+    color-scheme:light;
+    --nodaxis-blue:#146FE0;
+    --nodaxis-ink:#102439;
+    --nodaxis-cyan:#3CD5CF;
+    --nodaxis-white:#FFFFFF;
+    --nodaxis-paper:#F6F9FC;
+    --nodaxis-line:#DCE5EF;
+    --nodaxis-muted:#53697D;
+    --font-sans:"DejaVu",Arial,sans-serif;
+    --font-mono:ui-monospace,"Cascadia Code","SFMono-Regular",Consolas,monospace;
+    --text-small:clamp(.8125rem,.78rem + .12vw,.875rem);
+    --text-body:clamp(1rem,.96rem + .18vw,1.125rem);
+    --text-title:clamp(2.5rem,4.3vw,4.8rem);
+    --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;
+    --space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;
+    --space-12:48px;--space-16:64px;--space-20:80px;--space-24:96px;
+    --radius-control:8px;--radius-panel:16px;--radius-scene:24px;
+    --elevation-panel:0 14px 34px #10243918;
+    --motion-fast:220ms;--motion-standard:340ms;
+    --ease-standard:cubic-bezier(.2,.7,.2,1);
+}
