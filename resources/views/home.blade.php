@@ -87,8 +87,19 @@
             @foreach($catalogItems as $slug => $item)
                 <article class="catalog-card" data-category="{{ $item['group'] }}" data-name="{{ $item['search'] }}" data-slug="{{ $slug }}"><div class="catalog-media"><span class="catalog-tag">{{ $item['group_label'] }}</span><img src="{{ asset('assets/catalog/'.$item['image']) }}" alt="Representación conceptual de {{ strtolower($item['name']) }}" loading="lazy" width="600" height="450"></div><div class="catalog-info"><h3>{{ $item['name'] }}</h3><p>{{ $item['summary'] }}</p><div class="catalog-card-actions"><button type="button" data-feature-open="{{ $slug }}">Ver en detalle <span aria-hidden="true">↗</span></button><button type="button" data-quote-item="{{ $slug }}" aria-pressed="false">Añadir <span aria-hidden="true">+</span></button></div></div></article>
             @endforeach
-        </div><p class="empty-catalog" data-catalog-empty hidden>No encontramos esa categoría. Prueba otra búsqueda.</p>
-        <div class="quote-dock" data-quote-dock hidden><span><strong data-quote-count>0</strong> categorías para cotizar</span><a class="button button-primary" data-quote-go href="{{ url('/cotizar') }}">Continuar solicitud</a><button type="button" data-quote-clear aria-label="Vaciar selección">Vaciar</button></div>
+        </div>
+        <p class="empty-catalog" data-catalog-empty hidden>No encontramos esa categoría. Prueba otra búsqueda.</p>
+        @foreach($catalogItems as $slug => $item)
+            <template data-detail-guide="{{ $slug }}">@foreach($item['questions'] as $question)<li>{{ $question }}</li>@endforeach</template>
+        @endforeach
+        <dialog class="catalog-dialog" data-catalog-dialog aria-labelledby="catalog-dialog-title">
+            <button class="catalog-dialog-close" type="button" data-detail-close aria-label="Cerrar ficha">×</button>
+            <div class="catalog-dialog-layout">
+                <div class="catalog-dialog-visual"><span class="micro-label">NODAXIS / EQUIPOS</span><img data-detail-image src="{{ asset('assets/catalog/switch.webp') }}" alt="Representación conceptual de un switch" width="1200" height="900"><span>Imagen conceptual · modelos sujetos a confirmación</span></div>
+                <div class="catalog-dialog-copy"><p class="eyebrow" data-detail-group>Conectividad</p><h2 id="catalog-dialog-title" data-detail-title>Switches</h2><p class="catalog-dialog-summary" data-detail-summary>Puertos y capacidad para conectar áreas, usuarios y servicios.</p><div class="catalog-dialog-guide"><h3>Para dimensionar tu solicitud</h3><p>Comparte estos datos si los conoces. Podemos ayudarte a definirlos.</p><ul data-detail-questions></ul></div><div class="catalog-dialog-actions"><a class="button button-primary" data-detail-quote href="{{ url('/cotizar?intereses=switches') }}">Solicitar cotización</a><button type="button" data-detail-next>Ver otra familia</button></div></div>
+            </div>
+        </dialog>
+        <div class="quote-dock" data-quote-dock hidden><span><strong data-quote-count>0</strong> <span data-quote-label>familias de equipos</span> para cotizar</span><a class="button button-primary" data-quote-go href="{{ url('/cotizar') }}">Continuar solicitud</a><button type="button" data-quote-clear aria-label="Vaciar selección">Vaciar</button></div>
     </div>
 </section>
 

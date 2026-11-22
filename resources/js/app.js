@@ -309,17 +309,48 @@ if (catalog) {
     }));
     search.addEventListener('input', apply);
 
-    catalog.querySelectorAll('[data-feature-open]').forEach(button => button.addEventListener('click', () => {
-        const index = tabs.findIndex(tab => tab.dataset.featureTab === button.dataset.featureOpen);
-        if (index < 0) return;
-        chooseFeature(index);
-        feature.scrollIntoView({ behavior: reduceMotion.matches ? 'instant' : 'smooth', block: 'center' });
+    const detailDialog = document.querySelector('[data-catalog-dialog]');
+    const detailButtons = [...catalog.querySelectorAll('[data-feature-open]')];
+    let detailIndex = 0;
+    let detailOpener = null;
+    const showDetail = index => {
+        detailIndex = (index + cards.length) % cards.length;
+        const card = cards[detailIndex];
+        const slug = card.dataset.slug;
+        const image = card.querySelector('.catalog-media img');
+        detailDialog.querySelector('[data-detail-image]').src = image.src;
+        detailDialog.querySelector('[data-detail-image]').alt = image.alt;
+        detailDialog.querySelector('[data-detail-title]').textContent = card.querySelector('h3').textContent;
+        detailDialog.querySelector('[data-detail-summary]').textContent = card.querySelector('.catalog-info p').textContent;
+        detailDialog.querySelector('[data-detail-group]').textContent = card.querySelector('.catalog-tag').textContent;
+        const guide = document.querySelector(`template[data-detail-guide="${slug}"]`);
+        detailDialog.querySelector('[data-detail-questions]').replaceChildren(guide.content.cloneNode(true));
+        const quoteUrl = new URL('/cotizar', location.origin);
+        quoteUrl.searchParams.set('intereses', slug);
+        detailDialog.querySelector('[data-detail-quote]').href = quoteUrl.pathname + quoteUrl.search;
+        featureInteracted = true;
+        stopFeature();
+        showFeature(tabs.findIndex(tab => tab.dataset.featureTab === slug));
+    };
+    detailButtons.forEach(button => button.addEventListener('click', () => {
+        detailOpener = button;
+        showDetail(cards.findIndex(card => card.dataset.slug === button.dataset.featureOpen));
+        detailDialog.showModal();
+        document.body.classList.add('catalog-dialog-open');
     }));
+    detailDialog.querySelector('[data-detail-close]').addEventListener('click', () => detailDialog.close());
+    detailDialog.querySelector('[data-detail-next]').addEventListener('click', () => showDetail(detailIndex + 1));
+    detailDialog.addEventListener('click', event => { if (event.target === detailDialog) detailDialog.close(); });
+    detailDialog.addEventListener('close', () => {
+        document.body.classList.remove('catalog-dialog-open');
+        detailOpener?.focus();
+    });
 
     const itemButtons = [...catalog.querySelectorAll('[data-quote-item]'), featureAdd];
     const allowed = [...new Set(itemButtons.map(button => button.dataset.quoteItem))];
     const dock = document.querySelector('[data-quote-dock]');
     const dockCount = dock.querySelector('[data-quote-count]');
+    const dockLabel = dock.querySelector('[data-quote-label]');
     const dockLink = dock.querySelector('[data-quote-go]');
     let selected = [];
     try { selected = JSON.parse(localStorage.getItem('nodaxis-quote-items') || '[]').filter(item => allowed.includes(item)); } catch { selected = []; }
@@ -332,6 +363,7 @@ if (catalog) {
         });
         dock.hidden = selected.length === 0;
         dockCount.textContent = String(selected.length);
+        dockLabel.textContent = selected.length === 1 ? 'familia de equipos' : 'familias de equipos';
         const url = new URL('/cotizar', location.origin);
         selected.forEach(item => url.searchParams.append('intereses[]', item));
         dockLink.href = url.pathname + url.search;
