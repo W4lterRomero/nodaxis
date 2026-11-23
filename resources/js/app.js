@@ -90,7 +90,7 @@ const hologram = document.querySelector('[data-hologram]');
 if (hologram) {
     const nodes = [...hologram.querySelectorAll('[data-holo-node]')];
     const detail = {
-        sede: { index: 'SEDE', title: 'Cada espacio, pensado para trabajar', copy: 'Paredes, distancias y distribución influyen en cómo llega la red a cada área. Cuéntanos cómo es tu espacio y lo revisamos contigo.', caption: 'El espacio donde trabaja tu equipo', quote: '/cotizar?categoria=redes' },
+        sede: { index: 'SEDE', title: 'Cada espacio, pensado para trabajar', copy: 'Paredes, distancias y distribución influyen en cómo llega la red a cada área. Cuéntanos cómo es tu espacio y lo revisamos contigo.', caption: 'Una infraestructura que conecta cada área', quote: '/cotizar?categoria=redes' },
         wifi: { index: 'WI-FI', title: 'Que la señal llegue donde hace falta', copy: 'La ubicación de los puntos de acceso se define según las áreas, los obstáculos y las personas que usan la red.', caption: 'Una señal pensada para acompañar el trabajo', quote: '/cotizar?categoria=wifi' },
         equipos: { index: 'EQUIPOS', title: 'Cada puesto listo para avanzar', copy: 'Computadoras, impresoras y otros dispositivos dependen de conexiones bien ubicadas. Revisamos qué usa cada área antes de definir los puntos.', caption: 'Cada puesto, conectado para avanzar', quote: '/cotizar?categoria=equipos' },
         control: { index: 'ROUTER Y FIREWALL', title: 'Más claridad sobre tu conexión', copy: 'El router conecta la red a internet y el firewall ayuda a administrar el tráfico y los accesos.', caption: 'Una conexión más clara y administrable', quote: '/cotizar?categoria=seguridad' },

@@ -81,4 +81,34 @@ return [
             '¿Qué equipos y capacidad de enlace se utilizarán?',
         ],
     ],
+    'telefonia-ip' => [
+        'name' => 'Telefonía IP', 'group' => 'conectividad', 'group_label' => 'Conectividad',
+        'summary' => 'Conecta extensiones de voz a la red de datos de la organización.',
+        'image' => 'phone-ip.webp', 'search' => 'telefonía ip teléfono voip voz extensiones conectividad',
+        'questions' => [
+            '¿Cuántas extensiones necesitan conectarse?',
+            '¿Ya utilizan una central telefónica o servicio SIP?',
+            '¿Los teléfonos requieren alimentación PoE?',
+        ],
+    ],
+    'inyectores-poe' => [
+        'name' => 'Inyectores PoE', 'group' => 'conectividad', 'group_label' => 'Conectividad',
+        'summary' => 'Lleva datos y energía a un equipo compatible mediante un solo cable de red.',
+        'image' => 'poe-injector.webp', 'search' => 'inyector poe alimentación punto acceso cámara ethernet',
+        'questions' => [
+            '¿Qué equipo recibirá alimentación por Ethernet?',
+            '¿Conoces el consumo o estándar PoE que requiere?',
+            '¿Qué distancia debe cubrir el tendido de cable?',
+        ],
+    ],
+    'conversores-fibra' => [
+        'name' => 'Convertidores de medios', 'group' => 'conectividad', 'group_label' => 'Conectividad',
+        'summary' => 'Integra fibra óptica y Ethernet cuando el recorrido lo requiere.',
+        'image' => 'fiber-converter.webp', 'search' => 'convertidor de medios fibra óptica ethernet conectividad',
+        'questions' => [
+            '¿Qué distancia y tipo de fibra tiene el enlace?',
+            '¿Qué velocidad y tipo de puerto Ethernet necesitas?',
+            '¿Ya cuentas con equipos compatibles en ambos extremos?',
+        ],
+    ],
 ];
