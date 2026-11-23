@@ -55,7 +55,7 @@
 </section>
 
 <section class="architecture hologram-section section-space" id="arquitectura" aria-labelledby="architecture-title">
-    <div class="shell"><div class="hologram-heading" data-reveal><p class="eyebrow">Cómo se organiza una red</p><h2 id="architecture-title">Del router a cada área de trabajo.</h2><p>Elige una parte del esquema para ver cómo se conecta y qué se necesita definir.</p></div>
+    <div class="shell"><div class="hologram-heading" data-reveal><p class="eyebrow">Para que el trabajo siga su curso</p><h2 id="architecture-title">Una buena conexión cambia el día de trabajo.</h2><p>Cuando cada área tiene lo que necesita para conectarse, el equipo puede concentrarse en avanzar. Explora cómo se organiza la red de tu espacio.</p></div>
         <div class="hologram-stage" data-hologram data-active="sede" aria-label="Explorador interactivo de arquitectura de red">
             <div class="hologram-nodes" role="group" aria-label="Explorar componentes de la red">
                 <button class="hologram-node is-active" type="button" data-holo-node="sede" aria-pressed="true"><b>Sede</b></button>
