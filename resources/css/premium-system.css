@@ -89,6 +89,7 @@ p{font-size:1rem;line-height:1.65}
 .hologram-heading>p:last-child{margin:0;max-width:670px;font-size:1rem;line-height:1.65}
 .hologram-stage{border:1px solid #d1dce6;border-radius:20px;background:#fff;box-shadow:var(--elevation-soft)}
 .hologram-visual{background:linear-gradient(145deg,#f9fbfd,#ebf3f8)}
+.holo-mobile-diagram{display:none}
 .hologram-detail p{font-size:.96rem;line-height:1.6}
 .catalog{background:#f1f5f8}
 .catalog-heading{margin-bottom:38px}
@@ -219,9 +220,19 @@ body:has(.site-header.is-scrolled) .incentive-float{opacity:0;visibility:hidden;
     .solution-card .card-index{top:14px;left:16px}
     .hologram-section{padding-block:68px}
     .hologram-visual{height:255px}
-    .hologram-svg{width:125%;transform:translateX(-10%)}
+    .hologram-svg{width:100%;transform:none}
     .hologram-node b{font-size:.82rem}
     .hologram-detail p{font-size:.92rem}
+    .hologram-visual{height:auto;min-height:0;padding:16px}
+    .hologram-svg{display:none}
+    .holo-mobile-diagram{display:grid;gap:6px}
+    .holo-mobile-node{display:flex;min-height:42px;align-items:center;gap:10px;padding:9px 11px;border:1px solid #cbd9e4;border-radius:7px;background:#fff;color:#173149;font-size:.79rem;line-height:1.25}
+    .holo-mobile-node>span{flex:none;color:#1268d5;font-size:.68rem;font-weight:700;letter-spacing:.05em}
+    .holo-mobile-node b{font-weight:700}
+    .holo-mobile-arrow{height:13px;color:#668196;font-size:.85rem;line-height:1;text-align:center}
+    .holo-mobile-branch{padding:2px 0 4px;color:#53697c;font-size:.72rem;text-align:center}
+    .holo-mobile-endpoints{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+    .holo-mobile-endpoints .holo-mobile-node:last-child{grid-column:1/-1}
     .catalog-feature-body{grid-template-columns:1fr}
     .catalog-feature-copy{padding:28px 20px 6px}
     .catalog-feature-copy h3{font-size:clamp(2.25rem,10vw,3.1rem)}

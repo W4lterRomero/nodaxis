@@ -33,3 +33,16 @@
         <text x="107" y="96" text-anchor="middle">Otros equipos conectados</text>
     </g>
 </svg>
+<div class="holo-mobile-diagram" aria-hidden="true">
+    <div class="holo-mobile-node"><span>01</span><b>Internet</b></div>
+    <span class="holo-mobile-arrow">↓</span>
+    <div class="holo-mobile-node"><span>02</span><b>Router / firewall</b></div>
+    <span class="holo-mobile-arrow">↓</span>
+    <div class="holo-mobile-node"><span>03</span><b>Switch de red</b></div>
+    <span class="holo-mobile-branch">Conecta los equipos de la sede</span>
+    <div class="holo-mobile-endpoints">
+        <div class="holo-mobile-node"><span>04</span><b>Punto de acceso Wi-Fi</b></div>
+        <div class="holo-mobile-node"><span>05</span><b>Computadoras e impresoras</b></div>
+        <div class="holo-mobile-node"><span>06</span><b>Otros equipos conectados</b></div>
+    </div>
+</div>
