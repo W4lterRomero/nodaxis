@@ -1,28 +1,35 @@
-<svg class="hologram-svg" viewBox="0 0 1200 620" preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">
-    <defs>
-        <linearGradient id="holo-floor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#146FE0" stop-opacity=".03"/><stop offset="1" stop-color="#3CD5CF" stop-opacity=".17"/></linearGradient>
-        <linearGradient id="holo-beam" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#3CD5CF" stop-opacity=".02"/><stop offset="1" stop-color="#146FE0" stop-opacity=".2"/></linearGradient>
-        <radialGradient id="holo-base"><stop stop-color="#b9e8ff" stop-opacity=".75"/><stop offset="1" stop-color="#e9f6ff" stop-opacity="0"/></radialGradient>
-    </defs>
-    <ellipse cx="600" cy="456" rx="490" ry="138" fill="url(#holo-base)"/>
-    <g class="holo-grid" fill="none" stroke="#8fc5ed" stroke-width="1">
-        <path d="M600 196 33 575M600 196 170 575M600 196 306 575M600 196 442 575M600 196 580 575M600 196 718 575M600 196 855 575M600 196 991 575M600 196 1128 575"/>
-        <path d="M312 336h576M240 389h720M165 450h870M77 520h1046"/>
+<svg class="hologram-svg" viewBox="0 0 1200 470" preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">
+    <defs><marker id="network-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#617b8d"/></marker></defs>
+    <rect class="holo-site" x="32" y="30" width="1136" height="402" rx="12"/>
+    <text class="holo-site-label" x="54" y="60">SEDE / OFICINA</text>
+
+    <path class="holo-path holo-path-control" d="M205 235H337" marker-end="url(#network-arrow)"/>
+    <path class="holo-path" d="M492 235H595" marker-end="url(#network-arrow)"/>
+    <path class="holo-path holo-path-wifi" d="M760 235H835V133H894" marker-end="url(#network-arrow)"/>
+    <path class="holo-path holo-path-equipos" d="M760 235H894M835 235V340H894" marker-end="url(#network-arrow)"/>
+
+    <g class="network-device network-internet" transform="translate(100 190)">
+        <circle cx="46" cy="45" r="38"/><path d="M22 50h48M46 23c-14 15-14 31 0 46m0-46c14 15 14 31 0 46M24 35h44M24 59h44"/>
+        <text x="46" y="114" text-anchor="middle">Internet</text>
     </g>
-    <g class="holo-projection" fill="url(#holo-beam)"><path d="M414 197 474 461 601 500 600 157Z"/><path d="M600 157 600 500 900 443 770 201Z"/></g>
-    <g class="holo-building" fill="none" stroke="#73b8ee" stroke-width="2">
-        <path d="m368 262 195-84 255 61 0 203-255 64-195-87Z"/>
-        <path d="m368 262 195 66 255-89M563 178v328M563 328v178M368 419l195 87 255-64M818 239l-255 89-195-66"/>
-        <path d="m393 283 0 127 38 18V296m26 8v136m31-124v138m33-125v139M601 319v180m43-195v185m43-200v190m44-205v194m43-210v199" stroke-width="1" opacity=".62"/>
-        <path d="m368 330 195 68 255-84M368 384l195 71 255-81" stroke-width="1" opacity=".58"/>
-        <path d="m413 246 193-77M451 258l193-77M490 271l193-78M531 283l194-78M574 294l194-78" stroke-width="1" opacity=".35"/>
+    <g class="network-device network-router" transform="translate(337 171)">
+        <rect width="155" height="128" rx="8"/><path d="M18 25h119M22 47h9m12 0h9m12 0h9m12 0h9m12 0h9m12 0h9m12 0h9M22 94h9m12 0h9m12 0h9m12 0h9m12 0h9m12 0h9m12 0h9"/>
+        <text x="77" y="158" text-anchor="middle">Router / firewall</text>
     </g>
-    <g class="holo-window-light" fill="#3CD5CF"><circle cx="423" cy="351" r="3"/><circle cx="479" cy="372" r="3"/><circle cx="649" cy="379" r="3"/><circle cx="734" cy="348" r="3"/><circle cx="700" cy="415" r="3"/></g>
-    <g class="holo-links" fill="none" stroke="#146FE0" stroke-width="2">
-        <path class="holo-path holo-path-sede" d="M600 376 Q390 177 187 208"/>
-        <path class="holo-path holo-path-wifi" d="M600 376 Q797 149 1010 199"/>
-        <path class="holo-path holo-path-equipos" d="M600 376 Q350 532 202 477"/>
-        <path class="holo-path holo-path-control" d="M600 376 Q834 532 1013 465"/>
+    <g class="network-device network-switch" transform="translate(595 180)">
+        <rect width="165" height="110" rx="8"/><path d="M16 23h133M20 50h10m12 0h10m12 0h10m12 0h10m12 0h10m12 0h10m12 0h10m12 0h10M20 75h10m12 0h10m12 0h10m12 0h10m12 0h10m12 0h10m12 0h10m12 0h10"/>
+        <text x="82" y="141" text-anchor="middle">Switch de red</text>
     </g>
-    <g class="holo-hub"><circle cx="600" cy="376" r="64" fill="#e8f7ff" fill-opacity=".72"/><circle cx="600" cy="376" r="45" fill="#102439"/><circle cx="600" cy="376" r="58" fill="none" stroke="#146FE0" stroke-width="2"/><circle cx="600" cy="376" r="74" fill="none" stroke="#146FE0" stroke-width="1" opacity=".4"/><text x="600" y="394" text-anchor="middle" fill="#fff" font-family="DejaVu,Arial,sans-serif" font-weight="700" font-size="50">N</text></g>
+    <g class="network-device network-ap" transform="translate(894 86)">
+        <rect width="214" height="94" rx="8"/><path d="M87 52a20 20 0 0 1 40 0M77 42a34 34 0 0 1 60 0M105 54h4"/><circle cx="107" cy="58" r="2" fill="#146fe0"/>
+        <text x="107" y="122" text-anchor="middle">Punto de acceso Wi-Fi</text>
+    </g>
+    <g class="network-device network-computers" transform="translate(894 190)">
+        <rect width="214" height="94" rx="8"/><rect x="28" y="20" width="52" height="38" rx="3"/><path d="M40 67h28m-14-9v9M112 30h68m-68 13h53m-53 13h60"/>
+        <text x="107" y="122" text-anchor="middle">Computadoras e impresoras</text>
+    </g>
+    <g class="network-device network-device-extra" transform="translate(894 296)">
+        <rect width="214" height="74" rx="8"/><path d="M31 26h44v27H31zM38 61h30M52 53v8M109 29h73M109 43h53"/>
+        <text x="107" y="101" text-anchor="middle">Otros equipos conectados</text>
+    </g>
 </svg>

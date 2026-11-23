@@ -25,8 +25,13 @@ El comando pide nombre, correo y contraseña de al menos 12 caracteres. La cuent
 - Portada panorámica con video real de cableado, contraste para lectura y dos accesos a la cotización y al explorador. El video se pausa al salir de la vista o al solicitar movimiento reducido.
 - Navegación fija con indicador de sección, progreso de lectura y menú móvil que puede cerrarse con Escape.
 - Explorador de soluciones con cambio automático, pestañas, teclado, gesto lateral en móvil y pausa cuando el usuario interactúa o sale de la vista.
-- Topología de red animada e interactiva: Sede, Wi-Fi, Equipos y Control muestran su enfoque y llevan a la cotización correspondiente. Respeta la preferencia de movimiento reducido.
-- Escena visual del catálogo con ocho familias, imágenes conceptuales originales, transición entre equipos, movimiento suave al puntero, navegación con flechas, teclado y gesto lateral. Se detiene al interactuar, salir de la vista o solicitar movimiento reducido.
+- Topología de red interactiva: Sede, Wi-Fi, Equipos y Router/firewall resaltan su conexión y llevan a la cotización correspondiente.
+- Esquema de red directo: internet → router/firewall → switch → Wi-Fi y equipos. Las pestañas resaltan cada conexión.
+- Catálogo con ocho familias, selector horizontal, imágenes conceptuales, filtro, búsqueda y armado de una solicitud.
+- Servicios en una fila horizontal, con desplazamiento lateral por tarjetas en móvil.
+- Programa de afiliados anunciado al 10%; las condiciones de cálculo y pago se confirman por escrito antes de registrar cada referencia.
+- Boletín Pulso de red con consentimiento explícito, almacenamiento de suscripciones y baja. El panel privado permite revisar correos activos y descargarlos en CSV.
+- Página pública de términos y aviso de privacidad, con enlaces a las fuentes legales oficiales.
 - Catálogo por categorías con filtro, búsqueda, acceso a la escena de cada familia y selección de intereses guardada en el navegador. No se presentan marcas, modelos, precios ni existencias sin confirmar.
 - Ficha visual de cada familia con preguntas para dimensionar el proyecto, navegación entre equipos y enlace a cotización con la familia precargada.
 - Formulario de cotización guiado en tres pasos con revisión del proyecto, categorías e intereses precargados, validación, protección básica contra spam y persistencia en SQLite. Si JavaScript no carga, todos los campos siguen disponibles y el servidor valida la solicitud.
@@ -34,7 +39,7 @@ El comando pide nombre, correo y contraseña de al menos 12 caracteres. La cuent
 
 ## Alcance y datos
 
-Esta es una versión local. Las solicitudes se guardan en `database/database.sqlite`; **no se envían correos** ni se sincronizan con WordPress. Antes de publicar se deben confirmar servicios, inventario, cobertura, condiciones comerciales, aviso de privacidad, correo receptor y dominio. El contacto mostrado es `ac23015@ues.edu.sv`, proporcionado para el proyecto.
+Esta es una versión local. Las solicitudes y suscripciones se guardan en `database/database.sqlite`; **no se envían correos automáticamente** ni se sincronizan con WordPress. La lista del boletín se puede descargar desde el panel privado. Antes de publicar, configura un proveedor de correo para campañas y confirma las condiciones finales del programa de afiliados. Contactos proporcionados: `ac23014@ues.edu.sv`, `rh23015@ues.edu.sv`, `rg22023@ues.edu.sv` y WhatsApp `+503 7231 1719`.
 
 La identidad usa el logotipo publicado por NODAXIS, IBM Plex Sans y IBM Plex Mono autoalojadas y los colores confirmados `#146FE0`, `#102439` y blanco. Las tipografías se distribuyen bajo SIL Open Font License 1.1; la licencia se conserva en `public/assets/fonts/OFL-IBM-Plex.txt`. El archivo `public/assets/brand/nodaxis-logo.png` proviene del sitio WordPress existente. Los ocho recortes conceptuales de equipos se generaron para este proyecto y se guardan en `public/assets/catalog/` en formato WebP. Son imágenes orientativas, no fotografías de inventario. Las ilustraciones SVG previas están en `public/assets/illustrations/`.
 

@@ -48,6 +48,10 @@ if (form) {
             group.classList.remove('has-error');
         }));
 
+        const privacyConsent = form.querySelector('[name="privacy_consent"]');
+        const consentError = form.querySelector('.quote-consent-error');
+        privacyConsent?.addEventListener('change', () => { if (privacyConsent.checked && consentError) consentError.hidden = true; });
+
         const review = document.createElement('div');
         review.className = 'quote-review';
         review.innerHTML = '<div class="quote-review-head"><span class="micro-label">RESUMEN DEL PROYECTO</span><button type="button" data-step-edit="1">Editar proyecto ↗</button></div><dl><div><dt>Organización</dt><dd data-review-company>—</dd></div><div><dt>Ubicación</dt><dd data-review-location>—</dd></div><div><dt>Áreas</dt><dd data-review-categories>—</dd></div><div><dt>Equipos</dt><dd data-review-interests>Sin selección específica</dd></div><div class="review-message"><dt>Necesidad</dt><dd data-review-message>—</dd></div></dl>';
@@ -109,6 +113,13 @@ if (form) {
                     if (report) input.reportValidity();
                     return false;
                 }
+            }
+            if (index === 2 && privacyConsent && !privacyConsent.checked) {
+                if (report) {
+                    if (consentError) consentError.hidden = false;
+                    privacyConsent.focus();
+                }
+                return false;
             }
             return true;
         };

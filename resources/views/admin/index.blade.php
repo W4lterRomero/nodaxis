@@ -68,6 +68,17 @@
         @endforelse
 
         {{ $quotes->links() }}
+
+        <section class="admin-newsletter" aria-labelledby="newsletter-admin-title">
+            <div class="admin-section-heading"><div><p class="admin-eyebrow">Pulso de red</p><h2 id="newsletter-admin-title">Suscriptores activos</h2></div><a class="admin-export" href="{{ route('admin.newsletter.export') }}">Descargar CSV</a></div>
+            <p>Solo aparecen correos que dieron consentimiento y no solicitaron la baja.</p>
+            @forelse ($subscribers as $subscriber)
+                <div class="subscriber-row"><a href="mailto:{{ $subscriber->email }}">{{ $subscriber->email }}</a><time datetime="{{ $subscriber->created_at->toIso8601String() }}">{{ $subscriber->created_at->format('d/m/Y') }}</time></div>
+            @empty
+                <p>Aún no hay suscriptores activos.</p>
+            @endforelse
+            {{ $subscribers->links() }}
+        </section>
     </main>
 </body>
 </html>

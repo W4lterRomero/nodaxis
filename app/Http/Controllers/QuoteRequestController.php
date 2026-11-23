@@ -36,10 +36,11 @@ class QuoteRequestController extends Controller
             ])],
             'intereses' => ['sometimes', 'array', 'max:8'],
             'intereses.*' => ['required', 'string', 'distinct', Rule::in(array_keys(config('catalog')))],
+            'privacy_consent' => ['accepted'],
             'website' => ['nullable', 'prohibited'],
         ]);
 
-        unset($data['website']);
+        unset($data['website'], $data['privacy_consent']);
         $data['intereses'] ??= [];
 
         QuoteRequest::create($data);

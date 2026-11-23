@@ -3,7 +3,7 @@
 return [
     'switches' => [
         'name' => 'Switches', 'group' => 'conectividad', 'group_label' => 'Conectividad',
-        'summary' => 'Puertos y capacidad para conectar áreas, usuarios y servicios.',
+        'summary' => 'Conecta por cable computadoras, impresoras y puntos de acceso.',
         'image' => 'switch.webp', 'search' => 'switches redes ethernet puertos conectividad',
         'questions' => [
             '¿Cuántos dispositivos necesitan una conexión por cable?',
@@ -13,7 +13,7 @@ return [
     ],
     'access-points' => [
         'name' => 'Puntos de acceso Wi-Fi', 'group' => 'conectividad', 'group_label' => 'Conectividad',
-        'summary' => 'Cobertura inalámbrica planificada para espacios de trabajo.',
+        'summary' => 'Conecta laptops y teléfonos por Wi-Fi en las áreas de trabajo.',
         'image' => 'wifi.webp', 'search' => 'wifi inalámbrico acceso cobertura conectividad',
         'questions' => [
             '¿Qué espacios necesitan cobertura y cuentas con planos?',
@@ -23,7 +23,7 @@ return [
     ],
     'routers-firewalls' => [
         'name' => 'Routers y firewalls', 'group' => 'seguridad', 'group_label' => 'Seguridad',
-        'summary' => 'Enrutamiento y control perimetral según cada entorno.',
+        'summary' => 'Dirige el tráfico de internet y permite administrar el acceso a la red.',
         'image' => 'firewall.webp', 'search' => 'routers firewalls gateway seguridad perimetral',
         'questions' => [
             '¿Cuántos enlaces a internet utiliza la organización?',
@@ -33,7 +33,7 @@ return [
     ],
     'enlaces-inalambricos' => [
         'name' => 'Enlaces inalámbricos', 'group' => 'conectividad', 'group_label' => 'Conectividad',
-        'summary' => 'Conexión entre puntos donde el proyecto lo requiera.',
+        'summary' => 'Comunica dos ubicaciones cuando no hay cable entre ellas.',
         'image' => 'bridge.webp', 'search' => 'enlaces inalámbricos puente radio conectividad',
         'questions' => [
             '¿Qué distancia separa los dos puntos?',
@@ -43,7 +43,7 @@ return [
     ],
     'racks-gabinetes' => [
         'name' => 'Racks y gabinetes', 'group' => 'infraestructura', 'group_label' => 'Infraestructura',
-        'summary' => 'Orden físico y protección para los componentes de red.',
+        'summary' => 'Aloja y organiza switches, paneles y otros equipos.',
         'image' => 'rack.webp', 'search' => 'racks gabinetes armarios infraestructura',
         'questions' => [
             '¿Qué equipos deben instalarse en el gabinete?',
@@ -53,7 +53,7 @@ return [
     ],
     'cableado' => [
         'name' => 'Cableado y paneles', 'group' => 'infraestructura', 'group_label' => 'Infraestructura',
-        'summary' => 'Distribución organizada de enlaces y puntos de conexión.',
+        'summary' => 'Lleva conexiones de red desde el gabinete hasta cada puesto.',
         'image' => 'patch-panel.webp', 'search' => 'cableado paneles patch cables conectores infraestructura',
         'questions' => [
             '¿Cuántos puntos de red se necesitan y dónde estarán?',
@@ -63,7 +63,7 @@ return [
     ],
     'energia-ups' => [
         'name' => 'Respaldo de energía', 'group' => 'infraestructura', 'group_label' => 'Infraestructura',
-        'summary' => 'Opciones de continuidad eléctrica para equipos críticos.',
+        'summary' => 'Mantiene los equipos conectados durante un corte de energía.',
         'image' => 'ups.webp', 'search' => 'ups energía respaldo eléctrico infraestructura',
         'questions' => [
             '¿Qué equipos deben permanecer encendidos ante un corte?',
@@ -73,7 +73,7 @@ return [
     ],
     'fibra-optica' => [
         'name' => 'Fibra óptica y módulos', 'group' => 'conectividad', 'group_label' => 'Conectividad',
-        'summary' => 'Medios y componentes ópticos según distancia y capacidad.',
+        'summary' => 'Conecta equipos o edificios mediante enlaces de fibra óptica.',
         'image' => 'fiber.webp', 'search' => 'fibra óptica transceptores sfp módulos conectividad',
         'questions' => [
             '¿Qué distancia separa los equipos o edificios?',

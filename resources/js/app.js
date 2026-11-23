@@ -77,31 +77,12 @@ if (heroVideo) {
 
 const hologram = document.querySelector('[data-hologram]');
 if (hologram) {
-    if (!reduceMotion.matches) {
-        hologram.classList.add('is-prepared');
-        new IntersectionObserver(([entry], observer) => {
-            if (!entry.isIntersecting) return;
-            hologram.classList.add('is-visible');
-            observer.disconnect();
-        }, { threshold: .3 }).observe(hologram);
-        const visual = hologram.querySelector('.hologram-visual');
-        visual.addEventListener('pointermove', event => {
-            if (event.pointerType === 'touch') return;
-            const rect = visual.getBoundingClientRect();
-            visual.style.setProperty('--holo-x', `${((event.clientX - rect.left) / rect.width - .5) * 12}px`);
-            visual.style.setProperty('--holo-y', `${((event.clientY - rect.top) / rect.height - .5) * 8}px`);
-        });
-        visual.addEventListener('pointerleave', () => {
-            visual.style.setProperty('--holo-x', '0px');
-            visual.style.setProperty('--holo-y', '0px');
-        });
-    }
     const nodes = [...hologram.querySelectorAll('[data-holo-node]')];
     const detail = {
-        sede: { index: 'SEDE', title: 'El lugar de instalación', copy: 'La distribución de las áreas ayuda a definir recorridos de cable y cobertura Wi-Fi.', quote: '/cotizar?categoria=redes' },
-        wifi: { index: 'WI-FI', title: 'Puntos de acceso', copy: 'La ubicación y la cantidad de personas ayudan a estimar dónde se necesita señal.', quote: '/cotizar?categoria=wifi' },
-        equipos: { index: 'EQUIPOS', title: 'Switches y conexiones', copy: 'Los puertos y enlaces dependen de cuántos equipos deban conectarse.', quote: '/cotizar?categoria=equipos' },
-        control: { index: 'ROUTER Y FIREWALL', title: 'Conexión a internet', copy: 'Revisamos los enlaces y los accesos que necesita administrar la empresa.', quote: '/cotizar?categoria=seguridad' },
+        sede: { index: 'SEDE', title: 'El espacio define el diseño', copy: 'Las áreas, distancias y materiales del edificio ayudan a definir recorridos y cobertura.', quote: '/cotizar?categoria=redes' },
+        wifi: { index: 'WI-FI', title: 'Cobertura inalámbrica', copy: 'La ubicación de los puntos de acceso depende de las áreas y personas que usan la red.', quote: '/cotizar?categoria=wifi' },
+        equipos: { index: 'EQUIPOS', title: 'Dispositivos conectados', copy: 'Computadoras, impresoras y otros equipos se conectan al switch por cable.', quote: '/cotizar?categoria=equipos' },
+        control: { index: 'ROUTER Y FIREWALL', title: 'Conexión y seguridad perimetral', copy: 'El router conecta la red a internet y el firewall ayuda a controlar el tráfico.', quote: '/cotizar?categoria=seguridad' },
     };
     const select = (node, focus = false) => {
         const key = node.dataset.holoNode;
@@ -116,7 +97,7 @@ if (hologram) {
         hologram.querySelector('[data-holo-index]').textContent = data.index;
         hologram.querySelector('[data-holo-title]').textContent = data.title;
         hologram.querySelector('[data-holo-copy]').textContent = data.copy;
-        hologram.querySelector('[data-holo-link]').href = data.quote;
+        hologram.querySelector('[data-holo-link]').href = `${window.location.origin}${data.quote}`;
         if (focus) node.focus();
     };
     nodes.forEach((node, index) => {
@@ -221,15 +202,11 @@ if (catalog) {
     const featureTitle = feature.querySelector('[data-feature-title]');
     const featureCopy = feature.querySelector('[data-feature-copy]');
     const featureGroup = feature.querySelector('[data-feature-group]');
-    const featureIndex = feature.querySelector('[data-feature-index]');
     const featurePanel = feature.querySelector('[role="tabpanel"]');
     const featureVisual = feature.querySelector('[data-feature-visual]');
     const featureAdd = feature.querySelector('[data-quote-item]');
     let activeFeature = 0;
-    let featureTimer;
-    let featureVisible = false;
     let featureInteracted = false;
-    const stopFeature = () => { clearInterval(featureTimer); featureTimer = undefined; };
     const showFeature = (index, focus = false) => {
         const next = (index + tabs.length) % tabs.length;
         if (next === activeFeature && !focus) return;
@@ -243,10 +220,9 @@ if (catalog) {
             item.tabIndex = active ? 0 : -1;
         });
         featurePanel.setAttribute('aria-labelledby', tab.id);
-        featureIndex.textContent = String(next + 1).padStart(2, '0');
         const update = () => {
             featureImage.src = tab.dataset.featureImageSrc;
-            featureImage.alt = `Representación conceptual de ${tab.dataset.featureName.toLowerCase()}`;
+            featureImage.alt = `Imagen ilustrativa de ${tab.dataset.featureName.toLowerCase()}`;
             featureTitle.textContent = tab.dataset.featureName;
             featureCopy.textContent = tab.dataset.featureSummary;
             featureGroup.textContent = tab.dataset.featureGroupName;
@@ -260,12 +236,7 @@ if (catalog) {
         if (focus) tab.focus();
         if (featureInteracted || focus) tab.scrollIntoView({ behavior: reduceMotion.matches ? 'instant' : 'smooth', block: 'nearest', inline: 'center' });
     };
-    const startFeature = () => {
-        stopFeature();
-        if (featureInteracted || !featureVisible || reduceMotion.matches || document.hidden) return;
-        featureTimer = setInterval(() => showFeature(activeFeature + 1), 6500);
-    };
-    const chooseFeature = (index, focus = false) => { featureInteracted = true; stopFeature(); showFeature(index, focus); };
+    const chooseFeature = (index, focus = false) => { featureInteracted = true; showFeature(index, focus); };
     tabs.forEach((tab, index) => {
         tab.addEventListener('click', () => chooseFeature(index));
         tab.addEventListener('keydown', event => {
@@ -292,14 +263,6 @@ if (catalog) {
         featureVisual.style.setProperty('--move-y', `${((event.clientY - rect.top) / rect.height - .5) * 16}px`);
     });
     featureVisual.addEventListener('pointerleave', () => { featureVisual.style.setProperty('--move-x', '0px'); featureVisual.style.setProperty('--move-y', '0px'); });
-    feature.addEventListener('mouseenter', stopFeature);
-    feature.addEventListener('mouseleave', startFeature);
-    feature.addEventListener('focusin', stopFeature);
-    feature.addEventListener('focusout', event => { if (!feature.contains(event.relatedTarget)) startFeature(); });
-    document.addEventListener('visibilitychange', startFeature);
-    reduceMotion.addEventListener('change', startFeature);
-    new IntersectionObserver(([entry]) => { featureVisible = entry.isIntersecting; if (featureVisible) startFeature(); else stopFeature(); }, { threshold: .3 }).observe(feature);
-
     const filters = [...document.querySelectorAll('[data-filter]')];
     const search = document.querySelector('[data-catalog-search]');
     const cards = [...catalog.querySelectorAll('.catalog-card')];
@@ -376,12 +339,12 @@ if (catalog) {
         itemButtons.forEach(button => {
             const active = selected.includes(button.dataset.quoteItem);
             button.setAttribute('aria-pressed', String(active));
-            if (button === featureAdd) button.innerHTML = active ? 'Quitar de solicitud <span aria-hidden="true">−</span>' : 'Añadir a solicitud <span aria-hidden="true">↗</span>';
+            if (button === featureAdd) button.textContent = active ? 'Quitar de mi solicitud' : 'Añadir a mi solicitud';
             else button.innerHTML = active ? 'Quitar <span aria-hidden="true">−</span>' : 'Añadir <span aria-hidden="true">+</span>';
         });
         dock.hidden = selected.length === 0;
         dockCount.textContent = String(selected.length);
-        dockLabel.textContent = selected.length === 1 ? 'familia de equipos' : 'familias de equipos';
+        dockLabel.textContent = selected.length === 1 ? 'tipo de equipo' : 'tipos de equipo';
         const url = new URL('/cotizar', location.origin);
         selected.forEach(item => url.searchParams.append('intereses[]', item));
         dockLink.href = url.pathname + url.search;
