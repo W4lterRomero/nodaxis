@@ -64,3 +64,8 @@ docker compose exec vite npm run build
 ```
 
 La estructura principal está en `config/catalog.php`, `resources/views/`, `resources/css/cinematic.css`, `resources/css/catalog.css`, `resources/css/site.css`, `resources/js/app.js`, `app/Http/Controllers/` y `database/migrations/`.
+# GitHub Pages
+
+The Laravel application keeps its quote and newsletter handling when run with Docker or PHP. GitHub Pages only serves static files, so the Pages workflow exports the home, quote, and terms screens and changes quote/newsletter actions to WhatsApp or email. It does not save submissions or send newsletters.
+
+The site is exported by `scripts/export_pages.py` after the Laravel server and Vite production build are ready. `.github/workflows/pages.yml` runs this export and deploys it on pushes to `main`.

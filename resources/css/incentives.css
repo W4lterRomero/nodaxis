@@ -1,0 +1,19 @@
+.incentive-ribbon{position:relative;display:flex;overflow:hidden;min-height:38px;align-items:center;background:#102439;color:#fff}
+.incentive-ribbon-track{display:flex;flex:none;align-items:center;gap:35px;min-width:max-content;padding:8px 18px;animation:incentive-marquee 34s linear infinite}
+.incentive-ribbon:hover .incentive-ribbon-track{animation-play-state:paused}
+.incentive-ribbon a{display:inline-flex;align-items:center;gap:6px;color:#fff;text-decoration:none;font-size:.76rem;white-space:nowrap}
+.incentive-ribbon a:hover{text-decoration:underline;text-underline-offset:3px}
+.incentive-ribbon strong{color:#75ddff}
+.incentive-dot{width:7px;height:7px;border-radius:50%;background:#3cd5cf;box-shadow:0 0 0 4px #3cd5cf24}
+.incentive-separator{color:#3cd5cf;font-size:.9rem}
+.incentive-float{position:fixed;left:20px;bottom:24px;z-index:23;display:flex;align-items:center;gap:12px;width:min(348px,calc(100vw - 110px));min-height:68px;padding:10px 12px;border:1px solid #d7e4ee;border-radius:14px;background:#fff;color:#102439;box-shadow:0 12px 35px #10243924;animation:incentive-drift 5s ease-in-out infinite alternate}
+.incentive-float[hidden]{display:none}
+.incentive-float-mark{display:grid;flex:none;place-items:center;width:46px;height:46px;border-radius:11px;background:#e8f4ff;color:#146fe0;font-size:.88rem;font-weight:800}
+.incentive-float>a{display:grid;gap:3px;min-width:0;color:inherit;text-decoration:none;font-size:.82rem}
+.incentive-float>a span{color:#597084;font-size:.72rem}
+.incentive-float>a:hover strong{color:#146fe0}
+.incentive-float button{align-self:flex-start;margin-left:auto;border:0;background:transparent;color:#73889b;font-size:1.25rem;line-height:1;cursor:pointer}
+@keyframes incentive-marquee{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@keyframes incentive-drift{from{transform:translateX(0)}to{transform:translateX(min(4vw,34px))}}
+@media(max-width:600px){.incentive-ribbon-track{gap:22px;animation-duration:28s}.incentive-float{left:10px;bottom:72px;width:min(302px,calc(100vw - 92px));min-height:58px;padding:8px 9px;gap:9px;border-radius:12px}.incentive-float-mark{width:39px;height:39px;font-size:.78rem}.incentive-float>a{font-size:.74rem}.incentive-float>a span{font-size:.66rem}}
+@media(prefers-reduced-motion:reduce){.incentive-ribbon-track,.incentive-float{animation:none}.incentive-ribbon-track[aria-hidden="true"]{display:none}}

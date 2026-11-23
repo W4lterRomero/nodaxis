@@ -3,9 +3,20 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './quote-flow.js';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const siteBase = (document.querySelector('meta[name="nodaxis-base"]')?.content || '/').replace(/\/?$/, '/');
+const siteHref = path => new URL(`${siteBase}${path.replace(/^\/+/, '')}`, location.origin).href;
 
 const menuToggle = document.querySelector('.menu-toggle');
 const mainNav = document.querySelector('.main-nav');
+const incentiveFloat = document.querySelector('[data-incentive-float]');
+const incentiveDismiss = document.querySelector('[data-incentive-dismiss]');
+if (incentiveFloat && incentiveDismiss) {
+    try { incentiveFloat.hidden = sessionStorage.getItem('nodaxis-incentive-dismissed') === '1'; } catch { /* El banner sigue disponible si el almacenamiento está bloqueado. */ }
+    incentiveDismiss.addEventListener('click', () => {
+        incentiveFloat.hidden = true;
+        try { sessionStorage.setItem('nodaxis-incentive-dismissed', '1'); } catch { /* El cierre solo dura esta visita. */ }
+    });
+}
 const header = document.querySelector('.site-header');
 const mega = document.querySelector('[data-nav-mega]');
 if (mega) {
@@ -97,7 +108,7 @@ if (hologram) {
         hologram.querySelector('[data-holo-index]').textContent = data.index;
         hologram.querySelector('[data-holo-title]').textContent = data.title;
         hologram.querySelector('[data-holo-copy]').textContent = data.copy;
-        hologram.querySelector('[data-holo-link]').href = `${window.location.origin}${data.quote}`;
+        hologram.querySelector('[data-holo-link]').href = siteHref(data.quote);
         if (focus) node.focus();
     };
     nodes.forEach((node, index) => {
@@ -145,7 +156,7 @@ if (showcase) {
         });
         panel.setAttribute('aria-labelledby', `tab-${mode}`);
         const swap = () => {
-            image.src = data.image;
+            image.src = siteHref(data.image);
             image.alt = data.alt;
             title.textContent = data.title;
             copy.textContent = data.copy;
@@ -306,7 +317,7 @@ if (catalog) {
         detailDialog.querySelector('[data-detail-group]').textContent = card.querySelector('.catalog-tag').textContent;
         const guide = document.querySelector(`template[data-detail-guide="${slug}"]`);
         detailDialog.querySelector('[data-detail-questions]').replaceChildren(guide.content.cloneNode(true));
-        const quoteUrl = new URL('/cotizar', location.origin);
+        const quoteUrl = new URL(siteHref('/cotizar'));
         quoteUrl.searchParams.set('intereses', slug);
         detailDialog.querySelector('[data-detail-quote]').href = quoteUrl.pathname + quoteUrl.search;
         featureInteracted = true;
@@ -345,7 +356,7 @@ if (catalog) {
         dock.hidden = selected.length === 0;
         dockCount.textContent = String(selected.length);
         dockLabel.textContent = selected.length === 1 ? 'tipo de equipo' : 'tipos de equipo';
-        const url = new URL('/cotizar', location.origin);
+        const url = new URL(siteHref('/cotizar'));
         selected.forEach(item => url.searchParams.append('intereses[]', item));
         dockLink.href = url.pathname + url.search;
         try { localStorage.setItem('nodaxis-quote-items', JSON.stringify(selected)); } catch { /* El sitio sigue funcionando sin almacenamiento local. */ }
