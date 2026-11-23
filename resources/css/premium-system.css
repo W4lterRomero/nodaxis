@@ -340,7 +340,8 @@ body:has(.site-header.is-scrolled) .incentive-float{opacity:0;visibility:hidden;
 }
 
 /* Fluid spacing and a dedicated visual for every architecture area. */
-.hologram-section.section-space{padding-block:clamp(40px,6vw,86px)}
+.hologram-section.section-space{padding-block:clamp(40px,6vw,86px);padding-bottom:clamp(28px,4vw,52px)}
+.catalog.section-space{padding-top:clamp(34px,5vw,64px)}
 .hologram-heading{margin-bottom:clamp(18px,2.5vw,32px)}
 .hologram-heading h2{max-width:1100px;font-size:clamp(2.1rem,5vw,4.35rem);line-height:1.02}
 .hologram-heading>p:last-child{margin-top:clamp(8px,1.3vw,16px);font-size:clamp(.92rem,1.25vw,1.02rem);line-height:1.6}
@@ -366,7 +367,7 @@ body:has(.site-header.is-scrolled) .incentive-float{opacity:0;visibility:hidden;
     .hologram-detail p,.hologram-detail a{grid-column:1/-1}
 }
 @media(max-width:600px){
-    .hologram-section.section-space{padding-block:clamp(36px,8vw,52px)}
+    .hologram-section.section-space{padding-block:clamp(36px,8vw,52px);padding-bottom:28px}
     .hologram-heading{margin-bottom:18px}
     .hologram-heading h2{font-size:clamp(1.95rem,8.4vw,2.8rem)}
     .hologram-heading>p:last-child{font-size:.92rem}
