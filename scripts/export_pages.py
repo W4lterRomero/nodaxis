@@ -39,13 +39,6 @@ def staticize(html: str) -> str:
         form = match.group(0)
         form = re.sub(r'<form class="quote-form"[^>]*>', '<form class="quote-form" data-static-quote novalidate>', form, count=1)
         form = re.sub(r'\s*<input[^>]+name="_token"[^>]*>', '', form)
-        form = re.sub(
-            r'<div class="form-submit">.*?</div>\s*</div>',
-            '<div class="form-submit"><p>Completa los datos y elige dónde enviar tu solicitud. Podrás revisarla antes de enviarla.</p><div class="quote-contact-actions"><button class="button button-primary" type="button" data-quote-channel="whatsapp">Continuar por WhatsApp <span aria-hidden="true">↗</span></button><button class="quote-email-link" type="button" data-quote-channel="email">Enviar por correo</button></div></div>',
-            form,
-            count=1,
-            flags=re.S,
-        )
         return form
 
     html = re.sub(r'<form class="quote-form".*?</form>', make_static_quote, html, flags=re.S)
