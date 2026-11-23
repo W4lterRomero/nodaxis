@@ -40,6 +40,7 @@ jobs:
           cp .env.example .env
           touch database/database.sqlite
           php artisan key:generate --force
+          php artisan migrate --force
           php artisan serve --host=127.0.0.1 --port=8000 > /tmp/nodaxis-laravel.log 2>&1 &
           for attempt in $(seq 1 30); do
             if curl --fail --silent http://127.0.0.1:8000/ > /dev/null; then break; fi
