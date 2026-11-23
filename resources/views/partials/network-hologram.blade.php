@@ -1,5 +1,6 @@
 <img
     class="hologram-photo"
+    data-holo-area-image
     src="{{ asset('assets/motion/office-networking-v3.webp') }}"
     alt=""
     width="1440"

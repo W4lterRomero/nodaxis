@@ -324,3 +324,61 @@ body:has(.site-header.is-scrolled) .incentive-float{opacity:0;visibility:hidden;
     .catalog-feature-bottom{min-height:54px;padding:8px 14px}
     .catalog-feature-bottom button{width:36px;height:36px}
 }
+
+/* Put the lead solution beside its image instead of stretching it down the page. */
+.solution-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto}
+.solution-card-dark{grid-column:1/-1;grid-row:auto;min-height:340px;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-rows:1fr}
+.solution-card-dark .solution-visual{height:100%;min-height:0;overflow:hidden}
+.solution-card-dark .solution-visual img{width:138%;height:138%;max-width:none;padding:0;object-fit:contain}
+.solution-card-dark .solution-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,4vw,58px)}
+.solution-card-dark .solution-copy h3{font-size:clamp(1.7rem,2.7vw,2.8rem);line-height:1.08}
+@media(max-width:600px){
+    .solution-grid{grid-template-columns:1fr}
+    .solution-card-dark{grid-column:auto;grid-template-columns:1fr;grid-template-rows:190px auto;min-height:0}
+    .solution-card-dark .solution-visual img{width:138%;height:138%}
+    .solution-card-dark .solution-copy{padding:20px}
+}
+
+/* Fluid spacing and a dedicated visual for every architecture area. */
+.hologram-section.section-space{padding-block:clamp(40px,6vw,86px)}
+.hologram-heading{margin-bottom:clamp(18px,2.5vw,32px)}
+.hologram-heading h2{max-width:1100px;font-size:clamp(2.1rem,5vw,4.35rem);line-height:1.02}
+.hologram-heading>p:last-child{margin-top:clamp(8px,1.3vw,16px);font-size:clamp(.92rem,1.25vw,1.02rem);line-height:1.6}
+.hologram-stage{width:100%;min-width:0;border-radius:clamp(12px,1.6vw,18px)}
+.hologram-nodes{gap:clamp(6px,1vw,11px);padding:clamp(10px,1.4vw,15px) clamp(12px,2vw,24px)}
+.hologram-node{min-height:42px;padding:clamp(9px,1vw,12px) 8px}
+.hologram-node b{font-size:clamp(.76rem,1vw,.88rem)}
+.hologram-visual{height:clamp(260px,44vw,560px)}
+.hologram-photo{inset:0;width:100%;height:100%;object-position:center;transition:transform .55s cubic-bezier(.2,.7,.2,1),opacity .28s ease;}
+.hologram-stage[data-active="sede"] .hologram-photo,.hologram-stage[data-active="wifi"] .hologram-photo,.hologram-stage[data-active="equipos"] .hologram-photo,.hologram-stage[data-active="control"] .hologram-photo{object-position:center;--photo-scale:1.02}
+.hologram-photo-caption{right:clamp(14px,2.8vw,30px);bottom:clamp(13px,2.4vw,26px);left:clamp(14px,2.8vw,30px);gap:clamp(10px,2vw,20px)}
+.hologram-photo-caption-main{font-size:clamp(.9rem,1.4vw,1.22rem)}
+.hologram-photo-caption-note{max-width:min(34vw,345px);font-size:clamp(.62rem,.8vw,.74rem)}
+.hologram-detail{grid-template-columns:minmax(80px,.42fr) minmax(150px,.9fr) minmax(190px,1.5fr) auto;gap:clamp(10px,1.6vw,20px);padding:clamp(15px,2vw,23px) clamp(16px,2.3vw,28px)}
+.hologram-detail p{font-size:clamp(.86rem,1.1vw,.96rem)}
+.hologram-caption{padding:0 clamp(16px,2.3vw,28px) clamp(13px,1.8vw,20px);font-size:clamp(.67rem,.8vw,.76rem)}
+@media(max-width:820px){
+    .hologram-visual{height:clamp(260px,48vw,390px)}
+    .hologram-detail{grid-template-columns:minmax(95px,.5fr) minmax(170px,1fr) minmax(210px,1.4fr) auto}
+}
+@media(max-width:720px){
+    .hologram-detail{grid-template-columns:minmax(90px,.55fr) minmax(0,1fr);gap:8px 14px}
+    .hologram-detail p,.hologram-detail a{grid-column:1/-1}
+}
+@media(max-width:600px){
+    .hologram-section.section-space{padding-block:clamp(36px,8vw,52px)}
+    .hologram-heading{margin-bottom:18px}
+    .hologram-heading h2{font-size:clamp(1.95rem,8.4vw,2.8rem)}
+    .hologram-heading>p:last-child{font-size:.92rem}
+    .hologram-nodes{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:10px}
+    .hologram-node{min-height:40px;padding:9px 7px}
+    .hologram-visual{height:clamp(210px,62vw,290px)}
+    .hologram-photo-caption{display:block;right:12px;bottom:12px;left:12px}
+    .hologram-photo-caption-main{font-size:.88rem}
+    .hologram-photo-caption-note{display:table;max-width:min(84vw,310px);margin-top:7px;padding:6px 8px;font-size:.62rem;text-align:left}
+    .hologram-detail{display:block;padding:clamp(16px,5vw,21px)}
+    .hologram-detail .micro-label{display:block;margin-bottom:6px}
+    .hologram-detail h3{margin-bottom:7px;font-size:1.12rem}
+    .hologram-detail p{margin-bottom:12px;font-size:.9rem}
+    .hologram-caption{padding:0 17px 15px;font-size:.7rem}
+}

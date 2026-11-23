@@ -89,11 +89,12 @@ if (heroVideo) {
 const hologram = document.querySelector('[data-hologram]');
 if (hologram) {
     const nodes = [...hologram.querySelectorAll('[data-holo-node]')];
+    const photo = hologram.querySelector('[data-holo-area-image]');
     const detail = {
-        sede: { index: 'SEDE', title: 'Cada espacio, pensado para trabajar', copy: 'Paredes, distancias y distribución influyen en cómo llega la red a cada área. Cuéntanos cómo es tu espacio y lo revisamos contigo.', caption: 'Una infraestructura que conecta cada área', quote: '/cotizar?categoria=redes' },
-        wifi: { index: 'WI-FI', title: 'Que la señal llegue donde hace falta', copy: 'La ubicación de los puntos de acceso se define según las áreas, los obstáculos y las personas que usan la red.', caption: 'Una señal pensada para acompañar el trabajo', quote: '/cotizar?categoria=wifi' },
-        equipos: { index: 'EQUIPOS', title: 'Cada puesto listo para avanzar', copy: 'Computadoras, impresoras y otros dispositivos dependen de conexiones bien ubicadas. Revisamos qué usa cada área antes de definir los puntos.', caption: 'Cada puesto, conectado para avanzar', quote: '/cotizar?categoria=equipos' },
-        control: { index: 'ROUTER Y FIREWALL', title: 'Más claridad sobre tu conexión', copy: 'El router conecta la red a internet y el firewall ayuda a administrar el tráfico y los accesos.', caption: 'Una conexión más clara y administrable', quote: '/cotizar?categoria=seguridad' },
+        sede: { index: 'SEDE', title: 'Cada espacio, pensado para trabajar', copy: 'Paredes, distancias y distribución influyen en cómo llega la red a cada área. Cuéntanos cómo es tu espacio y lo revisamos contigo.', caption: 'Una infraestructura que conecta cada área', image: '/assets/motion/office-networking-v3.webp', quote: '/cotizar?categoria=redes' },
+        wifi: { index: 'WI-FI', title: 'Que la señal llegue donde hace falta', copy: 'La ubicación de los puntos de acceso se define según las áreas, los obstáculos y las personas que usan la red.', caption: 'Cobertura Wi-Fi para cada espacio', image: '/assets/motion/architecture-wifi.webp', quote: '/cotizar?categoria=wifi' },
+        equipos: { index: 'EQUIPOS', title: 'Cada puesto listo para avanzar', copy: 'Computadoras, impresoras y otros dispositivos dependen de conexiones bien ubicadas. Revisamos qué usa cada área antes de definir los puntos.', caption: 'Puestos y equipos conectados', image: '/assets/motion/architecture-equipment.webp', quote: '/cotizar?categoria=equipos' },
+        control: { index: 'ROUTER Y FIREWALL', title: 'Más claridad sobre tu conexión', copy: 'El router conecta la red a internet y el firewall ayuda a administrar el tráfico y los accesos.', caption: 'Control y conectividad en un solo punto', image: '/assets/motion/architecture-control.webp', quote: '/cotizar?categoria=seguridad' },
     };
     const select = (node, focus = false) => {
         const key = node.dataset.holoNode;
@@ -109,6 +110,11 @@ if (hologram) {
         hologram.querySelector('[data-holo-title]').textContent = data.title;
         hologram.querySelector('[data-holo-copy]').textContent = data.copy;
         hologram.querySelector('[data-holo-visual-caption]').textContent = data.caption;
+        if (photo && !photo.src.endsWith(data.image)) {
+            photo.style.opacity = '0.35';
+            photo.onload = () => { photo.style.opacity = ''; };
+            photo.src = siteHref(data.image);
+        }
         hologram.querySelector('[data-holo-link]').href = siteHref(data.quote);
         if (focus) node.focus();
     };
@@ -122,7 +128,6 @@ if (hologram) {
         });
     });
     const visual = hologram.querySelector('.hologram-visual');
-    const photo = hologram.querySelector('.hologram-photo');
     if (visual && photo && !reduceMotion.matches) {
         visual.addEventListener('pointermove', event => {
             if (event.pointerType === 'touch') return;
