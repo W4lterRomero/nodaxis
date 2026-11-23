@@ -79,7 +79,10 @@ p{font-size:1rem;line-height:1.65}
 .solution-copy h3,.solution-card-dark .solution-copy h3{max-width:580px;font-size:clamp(1.55rem,2.15vw,2.2rem);line-height:1.08;letter-spacing:-.035em}
 .solution-card-dark .solution-copy h3{font-size:clamp(2rem,3vw,3.05rem)}
 .solution-copy p{max-width:490px;font-size:.98rem;line-height:1.55}
-.showcase-heading h2{max-width:680px;font-size:clamp(2.7rem,4.6vw,4.45rem);line-height:1.04}
+.showcase-heading{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);align-items:end;row-gap:14px}
+.showcase-heading .eyebrow{grid-column:1/-1;margin:0}
+.showcase-heading h2{grid-column:1;grid-row:2;max-width:680px;margin:0;font-size:clamp(2.7rem,4.6vw,4.45rem);line-height:1.04}
+.showcase-heading>p:last-child{grid-column:2;grid-row:2;align-self:end;margin:0 0 6px}
 .hologram-section{background:#f7f9fb}
 .hologram-heading{text-align:left;max-width:1320px}
 .hologram-heading h2,.solutions .section-heading h2{font-size:clamp(2.7rem,4.6vw,4.45rem);line-height:1.04;letter-spacing:-.035em}
@@ -132,6 +135,8 @@ p{font-size:1rem;line-height:1.65}
 .site-footer p,.site-footer a{color:#c4d2dd}
 .site-footer .footer-title{color:#fff}
 .site-footer .footer-bottom{border-color:#344b5f}
+.incentive-float{transition:opacity .25s ease,transform .25s ease,visibility .25s}
+body:has(.site-header.is-scrolled) .incentive-float{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(12px)}
 .whatsapp-float{border-radius:10px;box-shadow:0 8px 24px #07162452}
 .button,.nav-cta,.catalog-feature-add,.catalog-feature-tab,.experience-tab{font-size:.9rem}
 @media(max-width:1100px){
@@ -174,6 +179,7 @@ p{font-size:1rem;line-height:1.65}
     .hero-product-scene{min-height:clamp(330px,58vw,460px)}
     .hero-product-scene img{height:clamp(320px,56vw,450px)}
     .showcase-heading{grid-template-columns:1fr;gap:12px}
+    .showcase-heading .eyebrow,.showcase-heading h2,.showcase-heading>p:last-child{grid-column:auto;grid-row:auto}
     .showcase-heading>p:last-child{margin:0;max-width:620px}
     .hologram-heading{margin-inline:auto}
     .solution-grid{grid-template-columns:1fr 1fr;grid-template-rows:none}
