@@ -35,10 +35,10 @@
 .hologram-visual{height:430px;background:#f6f8fa}
 .hologram-svg{width:100%;height:100%;transform:none}
 .holo-site{fill:#fff;stroke:#b8c8d3;stroke-width:2;stroke-dasharray:7 7;transition:stroke .2s,stroke-width .2s}
-.holo-site-label{fill:#53697d;font:600 14px "IBM Plex Sans",sans-serif;letter-spacing:.04em}
+.holo-site-label{fill:#53697d;font:600 14px "NODAXIS Sans",sans-serif;letter-spacing:.04em}
 .holo-path{fill:none;stroke:#718797;stroke-width:3;stroke-linecap:round;transition:stroke .2s,stroke-width .2s}
 .network-device{fill:#fff;stroke:#8196a5;stroke-width:2;transition:stroke .2s,fill .2s}
-.network-device text{fill:#102439;stroke:none;font:600 14px "IBM Plex Sans",sans-serif}
+.network-device text{fill:#102439;stroke:none;font:600 14px "NODAXIS Sans",sans-serif}
 .network-device circle,.network-device rect{vector-effect:non-scaling-stroke}
 .network-device path{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
 .network-internet{color:#53697d}
@@ -142,7 +142,7 @@
     .hologram-detail a{grid-column:1/3}
     .footer-bottom{align-items:flex-start}
 }
-@media(max-width:1320px){
+@media(max-width:900px){
     .shell{width:min(calc(100% - 40px),1360px)}
     .site-header{height:74px}
     .header-inner{position:relative;gap:12px}
