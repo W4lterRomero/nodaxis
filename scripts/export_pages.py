@@ -37,7 +37,7 @@ def staticize(html: str) -> str:
     )
     html = re.sub(
         r'<form class="quote-form".*?</form>',
-        '<div class="quote-form static-quote" data-static-quote><h2>Cuéntanos sobre tu proyecto</h2><p data-static-quote-summary>Para solicitar una cotización, escríbenos con tu empresa, ubicación y lo que necesitas conectar.</p><div class="static-quote-actions"><a class="button button-primary" data-static-whatsapp href="https://wa.me/50372311719">Continuar por WhatsApp</a><a data-static-email href="mailto:ac23014@ues.edu.sv?subject=Solicitud%20de%20cotizaci%C3%B3n%20NODAXIS">Enviar correo</a></div></div>',
+        '<div class="quote-form static-quote"><h2>Cuéntanos sobre tu proyecto</h2><p>Para solicitar una cotización, escríbenos con tu empresa, ubicación y lo que necesitas conectar.</p><div class="static-quote-actions"><a class="button button-primary" href="https://wa.me/50372311719?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20redes.">Continuar por WhatsApp</a><a href="mailto:ac23014@ues.edu.sv?subject=Solicitud%20de%20cotizaci%C3%B3n%20NODAXIS">Enviar correo</a></div></div>',
         html,
         flags=re.S,
     )
@@ -59,12 +59,7 @@ def main() -> None:
     for route, destination in pages.items():
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_text(staticize(fetch(route)), encoding="utf-8")
-    (OUT / "assets").mkdir(parents=True, exist_ok=True)
-    shutil.copytree(ROOT / "public" / "assets" / "brand", OUT / "assets" / "brand")
-    fonts_out = OUT / "assets" / "fonts"
-    fonts_out.mkdir(parents=True, exist_ok=True)
-    for font_file in ("DejaVuSans.ttf", "DejaVuSans-Bold.ttf", "LICENSE_DEJAVU"):
-        shutil.copy2(ROOT / "public" / "assets" / "fonts" / font_file, fonts_out / font_file)
+    shutil.copytree(ROOT / "public" / "assets", OUT / "assets")
     shutil.copytree(ROOT / "public" / "build", OUT / "build")
     for css in (OUT / "build" / "assets").glob("*.css"):
         content = css.read_text(encoding="utf-8")

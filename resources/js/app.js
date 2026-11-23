@@ -1,27 +1,41 @@
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './quote-flow.js';
 
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const siteBase = (document.querySelector('meta[name="nodaxis-base"]')?.content || '/').replace(/\/?$/, '/');
 const siteHref = path => new URL(`${siteBase}${path.replace(/^\/+/, '')}`, location.origin).href;
 
-const staticQuote = document.querySelector('[data-static-quote]');
-if (staticQuote) {
-    const categories = { redes: 'Redes empresariales', wifi: 'Wi-Fi', seguridad: 'Seguridad perimetral', cableado: 'Cableado e infraestructura', soporte: 'Soporte y mantenimiento', equipos: 'Equipos de red' };
-    const products = { switches: 'Switches', 'access-points': 'Puntos de acceso Wi-Fi', 'routers-firewalls': 'Routers y firewalls', 'enlaces-inalambricos': 'Enlaces inalámbricos', 'racks-gabinetes': 'Racks y gabinetes', cableado: 'Cableado y paneles', 'energia-ups': 'Respaldo de energía', 'fibra-optica': 'Fibra óptica y módulos', 'telefonia-ip': 'Telefonía IP', 'inyectores-poe': 'Inyectores PoE', 'conversores-fibra': 'Convertidores de medios' };
-    const params = new URL(location.href).searchParams;
-    const selectedCategories = [...params.getAll('categoria'), ...params.getAll('categorias[]')].map(value => categories[value]).filter(Boolean);
-    const selectedProducts = [...params.getAll('intereses'), ...params.getAll('intereses[]')].map(value => products[value]).filter(Boolean);
-    const details = [selectedCategories.length ? `Servicio: ${[...new Set(selectedCategories)].join(', ')}.` : '', selectedProducts.length ? `Equipos: ${[...new Set(selectedProducts)].join(', ')}.` : ''].filter(Boolean).join('\n');
-    const message = `Hola, quiero solicitar una cotización a NODAXIS.${details ? `\n${details}` : ''}\n\nEmpresa: \nUbicación: \nNecesidad: `;
-    const summary = staticQuote.querySelector('[data-static-quote-summary]');
-    if (details && summary) summary.textContent = `Tu solicitud incluye ${[...new Set([...selectedCategories, ...selectedProducts])].join(' y ')}. Continúa por WhatsApp o correo y agrega tu empresa, ubicación y descripción del proyecto.`;
-    const whatsapp = staticQuote.querySelector('[data-static-whatsapp]');
-    if (whatsapp) whatsapp.href = `https://wa.me/50372311719?text=${encodeURIComponent(message)}`;
-    const email = staticQuote.querySelector('[data-static-email]');
-    if (email) email.href = `mailto:ac23014@ues.edu.sv?subject=${encodeURIComponent('Solicitud de cotización NODAXIS')}&body=${encodeURIComponent(message)}`;
-}
-
 const menuToggle = document.querySelector('.menu-toggle');
 const mainNav = document.querySelector('.main-nav');
+const incentiveFloat = document.querySelector('[data-incentive-float]');
+const incentiveDismiss = document.querySelector('[data-incentive-dismiss]');
+if (incentiveFloat && incentiveDismiss) {
+    try { incentiveFloat.hidden = sessionStorage.getItem('nodaxis-incentive-dismissed') === '1'; } catch { /* El banner sigue disponible si el almacenamiento está bloqueado. */ }
+    incentiveDismiss.addEventListener('click', () => {
+        incentiveFloat.hidden = true;
+        try { sessionStorage.setItem('nodaxis-incentive-dismissed', '1'); } catch { /* El cierre solo dura esta visita. */ }
+    });
+}
+const header = document.querySelector('.site-header');
+const mega = document.querySelector('[data-nav-mega]');
+if (mega) {
+    const trigger = mega.querySelector('.nav-mega-trigger');
+    const panel = mega.querySelector('.nav-mega-panel');
+    const image = mega.querySelector('[data-mega-preview-image]');
+    const title = mega.querySelector('[data-mega-preview-title]');
+    const copy = mega.querySelector('[data-mega-preview-copy]');
+    const close = () => { trigger.setAttribute('aria-expanded', 'false'); panel.hidden = true; };
+    const open = () => { trigger.setAttribute('aria-expanded', 'true'); panel.hidden = false; };
+    trigger.addEventListener('click', () => trigger.getAttribute('aria-expanded') === 'true' ? close() : open());
+    mega.querySelectorAll('[data-mega-item]').forEach(item => {
+        const preview = () => { image.src = item.dataset.megaImage; image.alt = item.dataset.megaName; title.textContent = item.dataset.megaName; copy.textContent = item.dataset.megaSummary; };
+        item.addEventListener('mouseenter', preview);
+        item.addEventListener('focus', preview);
+    });
+    document.addEventListener('click', event => { if (!mega.contains(event.target)) close(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && !panel.hidden) { close(); trigger.focus(); } });
+}
 if (menuToggle && mainNav) {
     const setMenu = open => {
         menuToggle.setAttribute('aria-expanded', String(open));
@@ -30,38 +44,274 @@ if (menuToggle && mainNav) {
     };
     menuToggle.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
     mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
-    document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
-            setMenu(false);
-            menuToggle.focus();
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') { setMenu(false); menuToggle.focus(); } });
+    document.addEventListener('click', event => { if (menuToggle.getAttribute('aria-expanded') === 'true' && !header.contains(event.target)) setMenu(false); });
+    window.matchMedia('(min-width: 901px)').addEventListener('change', event => { if (event.matches) setMenu(false); });
+}
+
+if (header) {
+    const progress = header.querySelector('[data-scroll-progress]');
+    let ticking = false;
+    const updateScroll = () => {
+        const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        progress.style.transform = `scaleX(${Math.min(1, window.scrollY / max)})`;
+        header.classList.toggle('is-scrolled', window.scrollY > 15);
+        ticking = false;
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(updateScroll); } }, { passive: true });
+    updateScroll();
+    const links = [...header.querySelectorAll('[data-nav-link]')];
+    const sections = links.map(link => document.getElementById(link.hash.slice(1))).filter(Boolean);
+    if (sections.length) {
+        const sectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                links.forEach(link => link.classList.toggle('is-current', link.hash === `#${entry.target.id}`));
+            });
+        }, { rootMargin: '-25% 0px -65% 0px' });
+        sections.forEach(section => sectionObserver.observe(section));
+    }
+}
+
+const heroVideo = document.querySelector('[data-hero-video]');
+if (heroVideo) {
+    let visible = true;
+    const syncVideo = () => {
+        if (reduceMotion.matches || !visible || document.hidden) heroVideo.pause();
+        else heroVideo.play().catch(() => { /* La imagen de portada sigue visible si el navegador bloquea la reproducción. */ });
+    };
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; syncVideo(); }, { threshold: .08 }).observe(heroVideo);
+    document.addEventListener('visibilitychange', syncVideo);
+    reduceMotion.addEventListener('change', syncVideo);
+    syncVideo();
+}
+
+const hologram = document.querySelector('[data-hologram]');
+if (hologram) {
+    const nodes = [...hologram.querySelectorAll('[data-holo-node]')];
+    const photo = hologram.querySelector('[data-holo-area-image]');
+    const detail = {
+        sede: { index: 'SEDE', title: 'Cada espacio, pensado para trabajar', copy: 'Paredes, distancias y distribución influyen en cómo llega la red a cada área. Cuéntanos cómo es tu espacio y lo revisamos contigo.', caption: 'Una infraestructura que conecta cada área', image: '/assets/motion/office-networking-v3.webp', quote: '/cotizar?categoria=redes' },
+        wifi: { index: 'WI-FI', title: 'Que la señal llegue donde hace falta', copy: 'La ubicación de los puntos de acceso se define según las áreas, los obstáculos y las personas que usan la red.', caption: 'Cobertura Wi-Fi para cada espacio', image: '/assets/motion/architecture-wifi.webp', quote: '/cotizar?categoria=wifi' },
+        equipos: { index: 'EQUIPOS', title: 'Cada puesto listo para avanzar', copy: 'Computadoras, impresoras y otros dispositivos dependen de conexiones bien ubicadas. Revisamos qué usa cada área antes de definir los puntos.', caption: 'Puestos y equipos conectados', image: '/assets/motion/architecture-equipment.webp', quote: '/cotizar?categoria=equipos' },
+        control: { index: 'ROUTER Y FIREWALL', title: 'Más claridad sobre tu conexión', copy: 'El router conecta la red a internet y el firewall ayuda a administrar el tráfico y los accesos.', caption: 'Control y conectividad en un solo punto', image: '/assets/motion/architecture-control.webp', quote: '/cotizar?categoria=seguridad' },
+    };
+    const select = (node, focus = false) => {
+        const key = node.dataset.holoNode;
+        const data = detail[key];
+        if (!data) return;
+        hologram.dataset.active = key;
+        nodes.forEach(button => {
+            const active = button === node;
+            button.classList.toggle('is-active', active);
+            button.setAttribute('aria-pressed', String(active));
+        });
+        hologram.querySelector('[data-holo-index]').textContent = data.index;
+        hologram.querySelector('[data-holo-title]').textContent = data.title;
+        hologram.querySelector('[data-holo-copy]').textContent = data.copy;
+        hologram.querySelector('[data-holo-visual-caption]').textContent = data.caption;
+        if (photo && !photo.src.endsWith(data.image)) {
+            photo.style.opacity = '0.35';
+            photo.onload = () => { photo.style.opacity = ''; };
+            photo.src = siteHref(data.image);
         }
+        hologram.querySelector('[data-holo-link]').href = siteHref(data.quote);
+        if (focus) node.focus();
+    };
+    nodes.forEach((node, index) => {
+        node.addEventListener('click', () => select(node));
+        node.addEventListener('keydown', event => {
+            if (!['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'].includes(event.key)) return;
+            event.preventDefault();
+            const next = (index + (['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : -1) + nodes.length) % nodes.length;
+            select(nodes[next], true);
+        });
     });
-    document.addEventListener('click', event => {
-        if (menuToggle.getAttribute('aria-expanded') === 'true' && !mainNav.contains(event.target) && !menuToggle.contains(event.target)) setMenu(false);
+    const visual = hologram.querySelector('.hologram-visual');
+    if (visual && photo && !reduceMotion.matches) {
+        visual.addEventListener('pointermove', event => {
+            if (event.pointerType === 'touch') return;
+            const bounds = visual.getBoundingClientRect();
+            const x = (event.clientX - bounds.left) / bounds.width - .5;
+            const y = (event.clientY - bounds.top) / bounds.height - .5;
+            photo.style.setProperty('--photo-x', `${-x * 8}px`);
+            photo.style.setProperty('--photo-y', `${-y * 6}px`);
+        });
+        visual.addEventListener('pointerleave', () => {
+            photo.style.setProperty('--photo-x', '0px');
+            photo.style.setProperty('--photo-y', '0px');
+        });
+    }
+}
+
+const showcase = document.querySelector('[data-showcase]');
+if (showcase) {
+    const modes = {
+        redes: { title: 'Red cableada', copy: 'Conecta computadoras, impresoras y otros equipos por cable.', image: '/assets/catalog/switch.webp', alt: 'Switch para redes empresariales', quote: '/cotizar?categoria=redes' },
+        wifi: { title: 'Wi-Fi para tus áreas de trabajo', copy: 'Conecta a tu equipo con cobertura Wi-Fi en sus áreas de trabajo.', image: '/assets/catalog/wifi.webp', alt: 'Punto de acceso Wi-Fi empresarial', quote: '/cotizar?categoria=wifi' },
+        seguridad: { title: 'Router y firewall', copy: 'Administra los enlaces a internet y las reglas de acceso de tu red.', image: '/assets/catalog/firewall.webp', alt: 'Router y firewall para seguridad de red', quote: '/cotizar?categoria=seguridad' },
+    };
+    const buttons = [...showcase.querySelectorAll('.experience-tab')];
+    const image = showcase.querySelector('[data-stage-image]');
+    const title = showcase.querySelector('[data-stage-title]');
+    const copy = showcase.querySelector('[data-stage-copy]');
+    const quote = showcase.querySelector('[data-stage-link]');
+    const panel = showcase.querySelector('[role="tabpanel"]');
+    const progress = [...showcase.querySelectorAll('.experience-progress span')];
+    const order = Object.keys(modes);
+    let current = 'redes';
+    let timer;
+    let visible = true;
+    let interacting = false;
+    buttons.forEach(button => { button.tabIndex = button.dataset.mode === current ? 0 : -1; });
+    const setMode = (mode, focus = false) => {
+        if (!modes[mode] || mode === current) return;
+        current = mode;
+        const data = modes[mode];
+        buttons.forEach((button, index) => {
+            const active = button.dataset.mode === mode;
+            button.classList.toggle('is-active', active);
+            button.setAttribute('aria-selected', String(active));
+            button.tabIndex = active ? 0 : -1;
+            progress[index].classList.toggle('is-active', active);
+            if (active && focus) button.focus();
+        });
+        panel.setAttribute('aria-labelledby', `tab-${mode}`);
+        const swap = () => {
+            image.src = siteHref(data.image);
+            image.alt = data.alt;
+            title.textContent = data.title;
+            copy.textContent = data.copy;
+            quote.href = data.quote;
+            quote.setAttribute('aria-label', `Cotizar ${data.title.toLowerCase()}`);
+            if (!reduceMotion.matches) gsap.fromTo(image, { opacity: 0 }, { opacity: 1, duration: .55, ease: 'power2.out' });
+        };
+        if (reduceMotion.matches) swap();
+        else gsap.to(image, { opacity: 0, duration: .18, onComplete: swap });
+    };
+    const stopAuto = () => { clearInterval(timer); timer = undefined; };
+    const startAuto = () => {
+        stopAuto();
+        if (reduceMotion.matches || !visible || interacting) return;
+        timer = setInterval(() => setMode(order[(order.indexOf(current) + 1) % order.length]), 6000);
+    };
+    buttons.forEach(button => {
+        button.addEventListener('click', () => { setMode(button.dataset.mode); interacting = true; stopAuto(); });
+        button.addEventListener('keydown', event => {
+            if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const index = order.indexOf(current);
+            const next = event.key === 'Home' ? 0 : event.key === 'End' ? order.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + order.length) % order.length;
+            setMode(order[next], true);
+            interacting = true;
+            stopAuto();
+        });
     });
-    window.matchMedia('(min-width: 701px)').addEventListener('change', event => { if (event.matches) setMenu(false); });
+    let touchStartX = null;
+    panel.addEventListener('touchstart', event => { touchStartX = event.changedTouches[0]?.clientX ?? null; }, { passive: true });
+    panel.addEventListener('touchend', event => {
+        if (touchStartX === null) return;
+        const distance = (event.changedTouches[0]?.clientX ?? touchStartX) - touchStartX;
+        touchStartX = null;
+        if (Math.abs(distance) < 45) return;
+        setMode(order[(order.indexOf(current) + (distance < 0 ? 1 : -1) + order.length) % order.length]);
+        interacting = true;
+        stopAuto();
+    }, { passive: true });
+    showcase.addEventListener('mouseenter', stopAuto);
+    showcase.addEventListener('mouseleave', startAuto);
+    showcase.addEventListener('focusin', stopAuto);
+    showcase.addEventListener('focusout', event => { if (!showcase.contains(event.relatedTarget)) startAuto(); });
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) startAuto(); else stopAuto(); }, { threshold: .25 }).observe(showcase);
+    reduceMotion.addEventListener('change', startAuto);
+    startAuto();
 }
 
 const catalog = document.querySelector('[data-catalog-grid]');
 if (catalog) {
-    const cards = [...catalog.querySelectorAll('.catalog-card')];
+    const feature = document.querySelector('[data-catalog-feature]');
+    const tabs = [...feature.querySelectorAll('[data-feature-tab]')];
+    const featureImage = feature.querySelector('[data-feature-image]');
+    const featureTitle = feature.querySelector('[data-feature-title]');
+    const featureCopy = feature.querySelector('[data-feature-copy]');
+    const featureGroup = feature.querySelector('[data-feature-group]');
+    const featurePanel = feature.querySelector('[role="tabpanel"]');
+    const featureVisual = feature.querySelector('[data-feature-visual]');
+    const featureAdd = feature.querySelector('[data-quote-item]');
+    let activeFeature = 0;
+    let featureInteracted = false;
+    const showFeature = (index, focus = false) => {
+        const next = (index + tabs.length) % tabs.length;
+        if (next === activeFeature && !focus) return;
+        activeFeature = next;
+        const tab = tabs[next];
+        feature.dataset.active = tab.dataset.featureTab;
+        tabs.forEach((item, i) => {
+            const active = i === next;
+            item.classList.toggle('is-active', active);
+            item.setAttribute('aria-selected', String(active));
+            item.tabIndex = active ? 0 : -1;
+        });
+        featurePanel.setAttribute('aria-labelledby', tab.id);
+        const update = () => {
+            featureImage.src = tab.dataset.featureImageSrc;
+            featureImage.alt = tab.dataset.featureName;
+            featureTitle.textContent = tab.dataset.featureName;
+            featureCopy.textContent = tab.dataset.featureSummary;
+            featureGroup.textContent = tab.dataset.featureGroupName;
+            featureAdd.dataset.quoteItem = tab.dataset.featureTab;
+            featureAdd.dispatchEvent(new Event('catalog:selection-sync'));
+            if (!reduceMotion.matches) gsap.fromTo(featureImage, { opacity: 0 }, { opacity: 1, duration: .65, ease: 'power3.out', overwrite: true });
+        };
+        gsap.killTweensOf(featureImage);
+        if (reduceMotion.matches) update();
+        else gsap.to(featureImage, { opacity: 0, duration: .2, ease: 'power2.in', onComplete: update });
+        if (focus) tab.focus();
+        if (featureInteracted || focus) tab.scrollIntoView({ behavior: reduceMotion.matches ? 'instant' : 'smooth', block: 'nearest', inline: 'center' });
+    };
+    const chooseFeature = (index, focus = false) => { featureInteracted = true; showFeature(index, focus); };
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => chooseFeature(index));
+        tab.addEventListener('keydown', event => {
+            if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : activeFeature + (event.key === 'ArrowRight' ? 1 : -1);
+            chooseFeature(next, true);
+        });
+    });
+    feature.querySelector('[data-feature-prev]').addEventListener('click', () => chooseFeature(activeFeature - 1));
+    feature.querySelector('[data-feature-next]').addEventListener('click', () => chooseFeature(activeFeature + 1));
+    let touchX;
+    featurePanel.addEventListener('touchstart', event => { touchX = event.changedTouches[0]?.clientX; }, { passive: true });
+    featurePanel.addEventListener('touchend', event => {
+        if (touchX === undefined) return;
+        const distance = event.changedTouches[0].clientX - touchX;
+        touchX = undefined;
+        if (Math.abs(distance) > 45) chooseFeature(activeFeature + (distance < 0 ? 1 : -1));
+    }, { passive: true });
+    featureVisual.addEventListener('pointermove', event => {
+        if (reduceMotion.matches || event.pointerType === 'touch') return;
+        const rect = featureVisual.getBoundingClientRect();
+        featureVisual.style.setProperty('--move-x', `${((event.clientX - rect.left) / rect.width - .5) * 22}px`);
+        featureVisual.style.setProperty('--move-y', `${((event.clientY - rect.top) / rect.height - .5) * 16}px`);
+    });
+    featureVisual.addEventListener('pointerleave', () => { featureVisual.style.setProperty('--move-x', '0px'); featureVisual.style.setProperty('--move-y', '0px'); });
     const filters = [...document.querySelectorAll('[data-filter]')];
     const search = document.querySelector('[data-catalog-search]');
+    const cards = [...catalog.querySelectorAll('.catalog-card')];
     const empty = document.querySelector('[data-catalog-empty]');
-    const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
     let category = 'todos';
-
-    const applyFilters = () => {
-        const term = normalize(search?.value || '');
-        let visible = 0;
+    const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    const apply = () => {
+        const term = normalize(search.value);
+        let shown = 0;
         cards.forEach(card => {
-            const matches = (category === 'todos' || card.dataset.category === category) && normalize(`${card.dataset.name} ${card.textContent}`).includes(term);
-            card.hidden = !matches;
-            if (matches) visible++;
+            const match = (category === 'todos' || card.dataset.category === category) && normalize(card.dataset.name).includes(term);
+            card.hidden = !match;
+            if (match) shown++;
         });
-        if (empty) empty.hidden = visible > 0;
+        empty.hidden = shown > 0;
     };
-
     filters.forEach(button => button.addEventListener('click', () => {
         category = button.dataset.filter;
         filters.forEach(item => {
@@ -69,63 +319,85 @@ if (catalog) {
             item.classList.toggle('is-active', active);
             item.setAttribute('aria-pressed', String(active));
         });
-        applyFilters();
+        apply();
     }));
-    search?.addEventListener('input', applyFilters);
+    search.addEventListener('input', apply);
 
     const detailDialog = document.querySelector('[data-catalog-dialog]');
+    const detailButtons = [...catalog.querySelectorAll('[data-feature-open]')];
+    let detailIndex = 0;
     let detailOpener = null;
-    catalog.querySelectorAll('[data-feature-open]').forEach(button => button.addEventListener('click', () => {
-        const card = button.closest('.catalog-card');
-        if (!card || !detailDialog) return;
-        detailOpener = button;
+    const showDetail = index => {
+        detailIndex = (index + cards.length) % cards.length;
+        const card = cards[detailIndex];
         const slug = card.dataset.slug;
+        const image = card.querySelector('.catalog-media img');
+        detailDialog.querySelector('[data-detail-image]').src = image.src;
+        detailDialog.querySelector('[data-detail-image]').alt = image.alt;
         detailDialog.querySelector('[data-detail-title]').textContent = card.querySelector('h3').textContent;
-        detailDialog.querySelector('[data-detail-summary]').textContent = card.querySelector('.catalog-card > p').textContent;
+        detailDialog.querySelector('[data-detail-summary]').textContent = card.querySelector('.catalog-info p').textContent;
         detailDialog.querySelector('[data-detail-group]').textContent = card.querySelector('.catalog-tag').textContent;
         const guide = document.querySelector(`template[data-detail-guide="${slug}"]`);
         detailDialog.querySelector('[data-detail-questions]').replaceChildren(guide.content.cloneNode(true));
         const quoteUrl = new URL(siteHref('/cotizar'));
         quoteUrl.searchParams.set('intereses', slug);
         detailDialog.querySelector('[data-detail-quote]').href = quoteUrl.pathname + quoteUrl.search;
+        featureInteracted = true;
+        stopFeature();
+        showFeature(tabs.findIndex(tab => tab.dataset.featureTab === slug));
+    };
+    detailButtons.forEach(button => button.addEventListener('click', () => {
+        detailOpener = button;
+        showDetail(cards.findIndex(card => card.dataset.slug === button.dataset.featureOpen));
         detailDialog.showModal();
+        document.body.classList.add('catalog-dialog-open');
     }));
+    detailDialog.querySelector('[data-detail-close]').addEventListener('click', () => detailDialog.close());
+    detailDialog.querySelector('[data-detail-next]').addEventListener('click', () => showDetail(detailIndex + 1));
+    detailDialog.addEventListener('click', event => { if (event.target === detailDialog) detailDialog.close(); });
+    detailDialog.addEventListener('close', () => {
+        document.body.classList.remove('catalog-dialog-open');
+        detailOpener?.focus();
+    });
 
-    detailDialog?.querySelector('[data-detail-close]')?.addEventListener('click', () => detailDialog.close());
-    detailDialog?.addEventListener('click', event => { if (event.target === detailDialog) detailDialog.close(); });
-    detailDialog?.addEventListener('close', () => detailOpener?.focus());
-
-    const itemButtons = [...catalog.querySelectorAll('[data-quote-item]')];
+    const itemButtons = [...catalog.querySelectorAll('[data-quote-item]'), featureAdd];
     const allowed = [...new Set(itemButtons.map(button => button.dataset.quoteItem))];
     const dock = document.querySelector('[data-quote-dock]');
-    if (dock) {
-        const count = dock.querySelector('[data-quote-count]');
-        const label = dock.querySelector('[data-quote-label]');
-        const link = dock.querySelector('[data-quote-go]');
-        let selected = [];
-        try { selected = JSON.parse(localStorage.getItem('nodaxis-quote-items') || '[]').filter(item => allowed.includes(item)); } catch { selected = []; }
-
-        const renderSelection = () => {
-            itemButtons.forEach(button => {
-                const active = selected.includes(button.dataset.quoteItem);
-                button.setAttribute('aria-pressed', String(active));
-                button.innerHTML = active ? 'Quitar <span aria-hidden="true">−</span>' : 'Añadir <span aria-hidden="true">+</span>';
-            });
-            dock.hidden = selected.length === 0;
-            count.textContent = String(selected.length);
-            label.textContent = selected.length === 1 ? 'tipo de equipo' : 'tipos de equipo';
-            const url = new URL(siteHref('/cotizar'));
-            selected.forEach(item => url.searchParams.append('intereses[]', item));
-            link.href = url.pathname + url.search;
-            try { localStorage.setItem('nodaxis-quote-items', JSON.stringify(selected)); } catch { /* La selección vive durante esta visita. */ }
-        };
-
-        itemButtons.forEach(button => button.addEventListener('click', () => {
-            const item = button.dataset.quoteItem;
-            selected = selected.includes(item) ? selected.filter(value => value !== item) : [...selected, item];
-            renderSelection();
-        }));
-        dock.querySelector('[data-quote-clear]')?.addEventListener('click', () => { selected = []; renderSelection(); });
+    const dockCount = dock.querySelector('[data-quote-count]');
+    const dockLabel = dock.querySelector('[data-quote-label]');
+    const dockLink = dock.querySelector('[data-quote-go]');
+    let selected = [];
+    try { selected = JSON.parse(localStorage.getItem('nodaxis-quote-items') || '[]').filter(item => allowed.includes(item)); } catch { selected = []; }
+    const renderSelection = () => {
+        itemButtons.forEach(button => {
+            const active = selected.includes(button.dataset.quoteItem);
+            button.setAttribute('aria-pressed', String(active));
+            if (button === featureAdd) button.textContent = active ? 'Quitar de mi solicitud' : 'Añadir a mi solicitud';
+            else button.innerHTML = active ? 'Quitar <span aria-hidden="true">−</span>' : 'Añadir <span aria-hidden="true">+</span>';
+        });
+        dock.hidden = selected.length === 0;
+        dockCount.textContent = String(selected.length);
+        dockLabel.textContent = selected.length === 1 ? 'tipo de equipo' : 'tipos de equipo';
+        const url = new URL(siteHref('/cotizar'));
+        selected.forEach(item => url.searchParams.append('intereses[]', item));
+        dockLink.href = url.pathname + url.search;
+        try { localStorage.setItem('nodaxis-quote-items', JSON.stringify(selected)); } catch { /* El sitio sigue funcionando sin almacenamiento local. */ }
+    };
+    itemButtons.forEach(button => button.addEventListener('click', () => {
+        const item = button.dataset.quoteItem;
+        selected = selected.includes(item) ? selected.filter(value => value !== item) : [...selected, item];
         renderSelection();
-    }
+    }));
+    featureAdd.addEventListener('catalog:selection-sync', renderSelection);
+    dock.querySelector('[data-quote-clear]').addEventListener('click', () => { selected = []; renderSelection(); });
+    renderSelection();
+}
+
+if (!reduceMotion.matches) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.from('.hero-copy > *', { opacity: 0, y: 22, duration: .65, stagger: .11, ease: 'power2.out' });
+    gsap.from('.hero-experience', { opacity: 0, y: 30, duration: .9, ease: 'power2.out', scrollTrigger: { trigger: '.hero-experience', start: 'top 88%', once: true } });
+    document.querySelectorAll('[data-reveal]:not(.hero-copy):not(.hero-experience)').forEach(element => {
+        gsap.from(element, { opacity: 0, y: 28, duration: .7, ease: 'power2.out', scrollTrigger: { trigger: element, start: 'top 88%', once: true } });
+    });
 }
