@@ -5,20 +5,16 @@
     <div class="shell hero-layout">
         <div class="hero-copy">
             <p class="eyebrow">Redes empresariales · El Salvador</p>
-            <h1 id="hero-title">¿Qué necesitas conectar en tu empresa?</h1>
-            <p class="hero-intro">Cotizamos redes cableadas, Wi‑Fi y equipos para empresas e instituciones en El Salvador. Cuéntanos cuántas áreas y equipos necesitas conectar.</p>
-            <div class="hero-actions"><a class="button button-primary" href="{{ url('/cotizar') }}">Solicitar cotización</a><a class="text-link" href="#soluciones">Ver soluciones <span aria-hidden="true">↓</span></a></div>
+            <h1 id="hero-title">Conecta bien cada área de tu empresa.</h1>
+            <p class="hero-intro">Conectamos puestos, equipos y espacios de trabajo. Cuéntanos qué necesita tu operación y preparemos una cotización clara.</p>
+            <div class="hero-actions"><a class="button button-primary" href="{{ url('/cotizar') }}">Solicitar cotización</a><a class="text-link" href="#soluciones">Conocer soluciones <span aria-hidden="true">↓</span></a></div>
         </div>
-        <aside class="hero-aside" aria-label="Cómo iniciar un proyecto con NODAXIS">
-            <p class="hero-aside-title">Para empezar, cuéntanos:</p>
-            <ol class="hero-prompt-list">
-                <li><span>01</span><p>Qué áreas quieres conectar</p></li>
-                <li><span>02</span><p>Cuántas personas y equipos usan la red</p></li>
-                <li><span>03</span><p>Qué falla o qué quieres mejorar</p></li>
-            </ol>
-            <a href="{{ url('/cotizar') }}">Compartir los detalles <span aria-hidden="true">↗</span></a>
-        </aside>
+        <figure class="hero-photo">
+            <img src="{{ asset('assets/photography/technician.jpg') }}" alt="Técnico conectando equipos y cableado en un rack de comunicaciones" width="1600" height="1067" fetchpriority="high">
+            <figcaption><span>Redes para empresas</span><span>La conexión se construye desde cada punto.</span></figcaption>
+        </figure>
     </div>
+    <div class="shell hero-brief" aria-label="Información para preparar tu cotización"><span>Para empezar, comparte:</span><span>Las áreas que quieres conectar</span><span>Cuántas personas y equipos usan la red</span><span>Qué quieres resolver o mejorar</span></div>
 </section>
 
 <section class="solutions section-space" id="soluciones" aria-labelledby="solutions-title">
@@ -28,15 +24,16 @@
             <p>Describe el espacio, los equipos y el uso. Con esa información podemos conversar sobre el alcance del proyecto.</p>
         </div>
         <div class="solution-grid">
-            <article class="solution-card"><span class="solution-index">01 / CONEXIÓN POR CABLE</span><h3>Red cableada</h3><p>Conecta puestos de trabajo, impresoras y puntos de acceso mediante cableado y switches.</p><a class="text-link" href="{{ url('/cotizar?categoria=redes') }}">Cotizar red cableada <span aria-hidden="true">↗</span></a></article>
-            <article class="solution-card"><span class="solution-index">02 / COBERTURA</span><h3>Wi‑Fi para tus espacios</h3><p>Cuéntanos dónde se conectan las personas y qué áreas necesitan cobertura.</p><a class="text-link" href="{{ url('/cotizar?categoria=wifi') }}">Cotizar Wi‑Fi <span aria-hidden="true">↗</span></a></article>
-            <article class="solution-card"><span class="solution-index">03 / CONTROL DE RED</span><h3>Router y firewall</h3><p>Revisa opciones para administrar la conexión a internet y los accesos de tu red.</p><a class="text-link" href="{{ url('/cotizar?categoria=seguridad') }}">Consultar seguridad <span aria-hidden="true">↗</span></a></article>
+            <article class="solution-card"><img class="solution-photo" src="{{ asset('assets/photography/switch.jpg') }}" alt="Conexiones Ethernet en un switch de red" width="1200" height="800" loading="lazy"><div class="solution-card-copy"><span class="solution-index">01 / CONEXIÓN POR CABLE</span><h3>Red cableada</h3><p>Conecta puestos de trabajo, impresoras y puntos de acceso mediante cableado y switches.</p><a class="text-link" href="{{ url('/cotizar?categoria=redes') }}">Cotizar red cableada <span aria-hidden="true">↗</span></a></div></article>
+            <article class="solution-card"><img class="solution-photo" src="{{ asset('assets/photography/wifi.jpg') }}" alt="Router Wi-Fi 6 con antenas" width="1200" height="800" loading="lazy"><div class="solution-card-copy"><span class="solution-index">02 / COBERTURA</span><h3>Wi‑Fi para tus espacios</h3><p>Cuéntanos dónde se conectan las personas y qué áreas necesitan cobertura.</p><a class="text-link" href="{{ url('/cotizar?categoria=wifi') }}">Cotizar Wi‑Fi <span aria-hidden="true">↗</span></a></div></article>
+            <article class="solution-card"><img class="solution-photo" src="{{ asset('assets/photography/rack.jpg') }}" alt="Equipos de red instalados en un rack de comunicaciones" width="1600" height="1067" loading="lazy"><div class="solution-card-copy"><span class="solution-index">03 / CONTROL DE RED</span><h3>Router y firewall</h3><p>Revisa opciones para administrar la conexión a internet y los accesos de tu red.</p><a class="text-link" href="{{ url('/cotizar?categoria=seguridad') }}">Consultar seguridad <span aria-hidden="true">↗</span></a></div></article>
         </div>
     </div>
 </section>
 
 <section class="catalog section-space" id="catalogo" aria-labelledby="catalog-title">
     @php($catalogItems = config('catalog'))
+    @php($catalogPhotography = ['switches' => 'switch.jpg', 'access-points' => 'wifi.jpg', 'routers-firewalls' => 'rack.jpg', 'enlaces-inalambricos' => 'wifi.jpg', 'racks-gabinetes' => 'rack.jpg', 'cableado' => 'network-cables.jpg', 'energia-ups' => 'rack.jpg', 'fibra-optica' => 'fiber.jpg', 'telefonia-ip' => 'technician.jpg', 'inyectores-poe' => 'switch.jpg', 'conversores-fibra' => 'fiber.jpg'])
     <div class="shell">
         <div class="section-heading catalog-heading">
             <div><p class="eyebrow">Equipos</p><h2 id="catalog-title">Arma tu lista para cotizar.</h2></div>
@@ -54,10 +51,8 @@
         <div class="catalog-grid" data-catalog-grid>
             @foreach($catalogItems as $slug => $item)
                 <article class="catalog-card" data-category="{{ $item['group'] }}" data-name="{{ $item['search'] }}" data-slug="{{ $slug }}">
-                    <div class="catalog-card-top"><span class="catalog-number">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span><span class="catalog-tag">{{ $item['group_label'] }}</span></div>
-                    <h3>{{ $item['name'] }}</h3>
-                    <p>{{ $item['summary'] }}</p>
-                    <div class="catalog-card-actions"><button type="button" data-feature-open="{{ $slug }}">Ver detalles <span aria-hidden="true">↗</span></button><button type="button" data-quote-item="{{ $slug }}" aria-pressed="false">Añadir <span aria-hidden="true">+</span></button></div>
+                    <div class="catalog-media"><img src="{{ asset('assets/photography/'.$catalogPhotography[$slug]) }}" alt="" aria-hidden="true" loading="lazy" width="1200" height="800"><span class="catalog-tag">{{ $item['group_label'] }}</span></div>
+                    <div class="catalog-info"><span class="catalog-number">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span><h3>{{ $item['name'] }}</h3><p>{{ $item['summary'] }}</p><div class="catalog-card-actions"><button type="button" data-feature-open="{{ $slug }}">Ver detalles <span aria-hidden="true">↗</span></button><button type="button" data-quote-item="{{ $slug }}" aria-pressed="false">Añadir <span aria-hidden="true">+</span></button></div></div>
                 </article>
             @endforeach
         </div>
