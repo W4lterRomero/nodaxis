@@ -61,7 +61,6 @@ def main() -> None:
         destination.write_text(staticize(fetch(route)), encoding="utf-8")
     (OUT / "assets").mkdir(parents=True, exist_ok=True)
     shutil.copytree(ROOT / "public" / "assets" / "brand", OUT / "assets" / "brand")
-    shutil.copytree(ROOT / "public" / "assets" / "photography", OUT / "assets" / "photography")
     fonts_out = OUT / "assets" / "fonts"
     fonts_out.mkdir(parents=True, exist_ok=True)
     for font_file in ("DejaVuSans.ttf", "DejaVuSans-Bold.ttf", "LICENSE_DEJAVU"):
