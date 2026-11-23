@@ -4,24 +4,24 @@
 <section class="hero-cinema" aria-labelledby="hero-title">
     <div class="hero-cinema-inner shell">
         <div class="hero-copy" data-reveal>
-            <p class="hero-breadcrumb">Equipos <span aria-hidden="true">/</span> Conectividad</p>
-            <h1 id="hero-title">Switches para redes empresariales</h1>
-            <p class="hero-intro">Conecte áreas, usuarios y servicios. La selección depende de los puertos, la alimentación y el crecimiento que necesita su red.</p>
-            <div class="hero-actions"><a class="button button-primary" href="{{ url('/cotizar?intereses=switches') }}">Cotizar switches</a><a class="hero-secondary" href="#catalogo">Ver catálogo</a></div>
+            <p class="hero-breadcrumb">Ingeniería de redes · El Salvador</p>
+            <h1 id="hero-title">Conecta cada área de tu empresa.</h1>
+            <p class="hero-intro">Diseñamos e instalamos redes cableadas y Wi-Fi. Cuéntanos qué equipos y espacios necesitas conectar.</p>
+            <div class="hero-actions"><a class="button button-primary" href="{{ url('/cotizar') }}">Solicitar cotización</a><a class="hero-secondary" href="#catalogo">Ver equipos</a></div>
         </div>
         <figure class="hero-product-scene" data-reveal>
             <img src="{{ asset('assets/catalog/switch.webp') }}" alt="Imagen conceptual de un switch para redes empresariales" width="1200" height="900" fetchpriority="high">
-            <figcaption>Representación conceptual · modelo sujeto a cotización</figcaption>
-            <span class="hero-product-index" aria-hidden="true">Conectividad / 01</span>
+            <figcaption>Imagen conceptual · los equipos se definen según el proyecto</figcaption>
+            <span class="hero-product-index" aria-hidden="true">SWITCHES</span>
         </figure>
     </div>
 </section>
 
 <section class="showcase-section section-space" id="experiencia" aria-labelledby="showcase-title">
     <div class="shell">
-    <div class="showcase-heading" data-reveal><p class="eyebrow">Un sistema. Varias necesidades.</p><h2 id="showcase-title">Conecta lo que importa.</h2><p>Explora cómo se relacionan redes, Wi-Fi y seguridad. Cada propuesta se define según la ubicación y el alcance real del proyecto.</p></div>
+    <div class="showcase-heading" data-reveal><p class="eyebrow">Redes, Wi-Fi y seguridad</p><h2 id="showcase-title">Elige qué quieres resolver.</h2><p>Revisa qué equipo interviene en cada caso y cuéntanos qué necesitas cotizar.</p></div>
     <div class="hero-experience" data-reveal data-showcase aria-label="Explorador de soluciones">
-        <div class="experience-head"><span class="micro-label">EXPLORA NODAXIS</span><span class="live-indicator"><i aria-hidden="true"></i> Vista interactiva</span></div>
+        <div class="experience-head"><span class="micro-label">REDES · WI-FI · SEGURIDAD</span></div>
         <div class="experience-tabs" role="tablist" aria-label="Tipo de solución">
             <button class="experience-tab is-active" type="button" role="tab" aria-selected="true" data-mode="redes" id="tab-redes" aria-controls="panel-solucion">Redes</button>
             <button class="experience-tab" type="button" role="tab" aria-selected="false" data-mode="wifi" id="tab-wifi" aria-controls="panel-solucion">Wi-Fi</button>
@@ -31,38 +31,36 @@
             <div class="stage-grid" aria-hidden="true"></div>
             <div class="stage-orbit stage-orbit-a" aria-hidden="true"></div><div class="stage-orbit stage-orbit-b" aria-hidden="true"></div>
             <img class="stage-product" data-stage-image src="{{ asset('assets/catalog/switch.webp') }}" alt="Representación conceptual de un switch empresarial" width="1200" height="900">
-            <div class="stage-chip stage-chip-top"><span class="chip-dot"></span> Equipos según necesidad</div>
-            <div class="stage-chip stage-chip-bottom"><span class="chip-mini-icon" aria-hidden="true">↗</span> Diseño + implementación</div>
+            <div class="stage-chip stage-chip-top"><span class="chip-dot"></span> Equipos elegidos para el proyecto</div>
+            <div class="stage-chip stage-chip-bottom"><span class="chip-mini-icon" aria-hidden="true">↗</span> Diseño e instalación</div>
         </div>
-        <div class="experience-detail"><div><span class="micro-label">SOLUCIÓN EXPLORADA</span><h2 data-stage-title>Redes empresariales</h2><p data-stage-copy>Conecta áreas, equipos y usuarios con una arquitectura pensada para crecer.</p></div><a data-stage-link href="{{ url('/cotizar?categoria=redes') }}" aria-label="Cotizar redes empresariales">Cotizar <span aria-hidden="true">↗</span></a></div>
+        <div class="experience-detail"><div><span class="micro-label" data-stage-label>REDES EMPRESARIALES</span><h2 data-stage-title>Red entre áreas y equipos</h2><p data-stage-copy>Conexión por cable para computadoras, impresoras y otros equipos de trabajo.</p></div><a data-stage-link href="{{ url('/cotizar?categoria=redes') }}" aria-label="Cotizar redes empresariales">Cotizar <span aria-hidden="true">↗</span></a></div>
         <div class="experience-progress" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
     </div>
     </div>
 </section>
 
-<div class="section-divider shell" aria-hidden="true"><span></span><span>01 / SOLUCIONES</span></div>
-
 <section class="solutions section-space" id="soluciones" aria-labelledby="solutions-title">
-    <div class="shell"><div class="section-heading" data-reveal><div><p class="eyebrow">Soluciones conectadas</p><h2 id="solutions-title">Cada espacio pide<br>una red distinta.</h2></div><p>Selecciona una línea para visualizar su enfoque. La propuesta final se define con tus requisitos, sitio y operación.</p></div>
+    <div class="shell"><div class="section-heading" data-reveal><div><p class="eyebrow">Servicios de red</p><h2 id="solutions-title">Conectividad para el trabajo diario.</h2></div><p>Diseñamos la solución a partir del espacio, la cantidad de usuarios y los equipos que necesitan conectarse.</p></div>
         <div class="solution-grid">
-            <a class="solution-card solution-card-dark" href="{{ url('/cotizar?categoria=redes') }}" data-reveal><span class="card-index">CONECTIVIDAD / REDES EMPRESARIALES</span><div class="solution-visual"><img src="{{ asset('assets/catalog/switch.webp') }}" alt="Imagen conceptual de un switch para redes empresariales" width="1200" height="900" loading="lazy"></div><div class="solution-copy"><h3>La red que conecta tu operación.</h3><p>Infraestructura cableada diseñada en función de tus áreas, usuarios y equipos.</p><span class="card-action">Explorar redes</span></div></a>
-            <a class="solution-card solution-card-blue" href="{{ url('/cotizar?categoria=wifi') }}" data-reveal><span class="card-index">MOVILIDAD / WI-FI</span><div class="solution-visual"><img src="{{ asset('assets/catalog/wifi.webp') }}" alt="Imagen conceptual de puntos de acceso Wi-Fi" width="1200" height="900" loading="lazy"></div><div class="solution-copy"><h3>Cobertura pensada para el espacio.</h3><p>Planifica la conexión según distribución y demanda.</p><span class="card-action">Explorar Wi-Fi</span></div></a>
-            <a class="solution-card solution-card-light" href="{{ url('/cotizar?categoria=seguridad') }}" data-reveal><span class="card-index">CONTROL / SEGURIDAD PERIMETRAL</span><div class="solution-visual"><img src="{{ asset('assets/catalog/firewall.webp') }}" alt="Imagen conceptual de un equipo de seguridad perimetral" width="1200" height="900" loading="lazy"></div><div class="solution-copy"><h3>Control desde el perímetro.</h3><p>Enrutamiento y acceso definidos para tus requisitos.</p><span class="card-action">Explorar seguridad</span></div></a>
+            <a class="solution-card solution-card-dark" href="{{ url('/cotizar?categoria=redes') }}" data-reveal><span class="card-index">RED CABLEADA</span><div class="solution-visual"><img src="{{ asset('assets/catalog/switch.webp') }}" alt="Imagen conceptual de un switch para redes empresariales" width="1200" height="900" loading="lazy"></div><div class="solution-copy"><h3>Conecta computadoras, impresoras y áreas.</h3><p>Definimos puntos, equipos y cableado según la distribución de tu oficina o local.</p><span class="card-action">Cotizar red cableada</span></div></a>
+            <a class="solution-card solution-card-blue" href="{{ url('/cotizar?categoria=wifi') }}" data-reveal><span class="card-index">WI-FI</span><div class="solution-visual"><img src="{{ asset('assets/catalog/wifi.webp') }}" alt="Imagen conceptual de puntos de acceso Wi-Fi" width="1200" height="900" loading="lazy"></div><div class="solution-copy"><h3>Wi-Fi en las áreas que necesitas.</h3><p>Ubicamos los puntos de acceso según el espacio y las personas que se conectan.</p><span class="card-action">Cotizar Wi-Fi</span></div></a>
+            <a class="solution-card solution-card-light" href="{{ url('/cotizar?categoria=seguridad') }}" data-reveal><span class="card-index">ROUTER Y FIREWALL</span><div class="solution-visual"><img src="{{ asset('assets/catalog/firewall.webp') }}" alt="Imagen conceptual de un equipo de seguridad perimetral" width="1200" height="900" loading="lazy"></div><div class="solution-copy"><h3>Administra la salida a internet.</h3><p>Revisamos enlaces, accesos y separación de redes.</p><span class="card-action">Cotizar seguridad</span></div></a>
         </div>
     </div>
 </section>
 
 <section class="architecture hologram-section section-space" id="arquitectura" aria-labelledby="architecture-title">
-    <div class="shell"><div class="hologram-heading" data-reveal><p class="eyebrow">Pensado como sistema</p><h2 id="architecture-title">Una red visible.<br>Una operación conectada.</h2><p>Explora las partes de una arquitectura empresarial. La distribución final se define con los datos de tu espacio y tus usuarios.</p></div>
+    <div class="shell"><div class="hologram-heading" data-reveal><p class="eyebrow">Cómo se organiza una red</p><h2 id="architecture-title">Del router a cada área de trabajo.</h2><p>Selecciona una parte del esquema para ver qué función cumple y qué información necesitamos para cotizarla.</p></div>
         <div class="hologram-stage" data-hologram data-active="sede" aria-label="Explorador interactivo de arquitectura de red">
             <div class="hologram-visual" aria-hidden="true">@include('partials.network-hologram')</div>
             <div class="hologram-nodes" role="group" aria-label="Explorar componentes de la red">
-                <button class="hologram-node is-active" type="button" data-holo-node="sede" aria-pressed="true"><span>01</span><b>Sede</b></button>
-                <button class="hologram-node" type="button" data-holo-node="wifi" aria-pressed="false"><span>02</span><b>Wi-Fi</b></button>
-                <button class="hologram-node" type="button" data-holo-node="equipos" aria-pressed="false"><span>03</span><b>Equipos</b></button>
-                <button class="hologram-node" type="button" data-holo-node="control" aria-pressed="false"><span>04</span><b>Control</b></button>
+                <button class="hologram-node is-active" type="button" data-holo-node="sede" aria-pressed="true"><b>Sede</b></button>
+                <button class="hologram-node" type="button" data-holo-node="wifi" aria-pressed="false"><b>Wi-Fi</b></button>
+                <button class="hologram-node" type="button" data-holo-node="equipos" aria-pressed="false"><b>Equipos</b></button>
+                <button class="hologram-node" type="button" data-holo-node="control" aria-pressed="false"><b>Router y firewall</b></button>
             </div>
-            <div class="hologram-detail" aria-live="polite"><span class="micro-label" data-holo-index>01 / SEDE</span><h3 data-holo-title>Una base para conectar.</h3><p data-holo-copy>La ubicación y la cantidad de usuarios orientan la distribución de la red.</p><a data-holo-link href="{{ url('/cotizar?categoria=redes') }}">Cotizar esta solución <span aria-hidden="true">↗</span></a></div>
+            <div class="hologram-detail" aria-live="polite"><span class="micro-label" data-holo-index>SEDE</span><h3 data-holo-title>El lugar de instalación</h3><p data-holo-copy>La distribución de las áreas ayuda a definir recorridos de cable y cobertura Wi-Fi.</p><a data-holo-link href="{{ url('/cotizar?categoria=redes') }}">Cotizar esta parte <span aria-hidden="true">↗</span></a></div>
             <p class="hologram-caption">Visualización orientativa · no representa una instalación real</p>
         </div>
     </div>
@@ -70,9 +68,9 @@
 
 <section class="catalog section-space" id="catalogo" aria-labelledby="catalog-title">
     @php($catalogItems = config('catalog'))
-    <div class="shell"><div class="section-heading catalog-heading" data-reveal><div><p class="eyebrow">Equipos para cotizar</p><h2 id="catalog-title">Elige lo que tu red necesita.</h2></div><p>Explora familias de equipos y arma una solicitud. Las imágenes son ilustrativas; modelos y disponibilidad se confirman al cotizar.</p></div>
+    <div class="shell"><div class="section-heading catalog-heading" data-reveal><div><p class="eyebrow">Catálogo</p><h2 id="catalog-title">Equipos para cada parte de la red.</h2></div><p>Consulta para qué sirve cada familia y agréguela a tu solicitud. Las imágenes son conceptuales; confirmamos modelos al cotizar.</p></div>
         <div class="catalog-feature" data-catalog-feature aria-label="Explorador visual de equipos">
-            <div class="catalog-feature-top"><span class="micro-label">NODAXIS / EQUIPOS</span><span class="catalog-feature-count"><b data-feature-index>01</b> / 08</span></div>
+            <div class="catalog-feature-top"><span class="micro-label">FAMILIAS DE EQUIPOS</span><span class="catalog-feature-count"><b data-feature-index>01</b> / 08</span></div>
             <div class="catalog-feature-tabs" role="tablist" aria-label="Familias de equipos">
                 @foreach($catalogItems as $slug => $item)
                     <button type="button" class="catalog-feature-tab @if($loop->first) is-active @endif" role="tab" aria-selected="{{ $loop->first ? 'true' : 'false' }}" aria-controls="catalog-feature-panel" id="feature-tab-{{ $slug }}" data-feature-tab="{{ $slug }}" data-feature-name="{{ $item['name'] }}" data-feature-summary="{{ $item['summary'] }}" data-feature-group-name="{{ $item['group_label'] }}" data-feature-image-src="{{ asset('assets/catalog/'.$item['image']) }}" tabindex="{{ $loop->first ? '0' : '-1' }}">{{ $item['name'] }}</button>
@@ -105,7 +103,7 @@
     </div>
 </section>
 
-<section class="services section-space" id="servicios" aria-labelledby="services-title"><div class="shell services-layout"><div data-reveal><p class="eyebrow">Servicios NODAXIS</p><h2 id="services-title">Del diagnóstico a la operación.</h2><p>Podemos definir el alcance contigo desde el primer contacto. Cada etapa se ajusta al proyecto.</p><a class="button button-outline" href="{{ url('/cotizar') }}">Hablar de mi proyecto</a></div><div class="service-list"><div class="service-row" data-reveal><span>01</span><div><h3>Diseño e implementación</h3><p>Arquitectura de red, selección de componentes e instalación según objetivos.</p></div></div><div class="service-row" data-reveal><span>02</span><div><h3>Seguridad y optimización</h3><p>Revisión de conectividad, segmentación y puntos de mejora.</p></div></div><div class="service-row" data-reveal><span>03</span><div><h3>Soporte y mantenimiento</h3><p>Acompañamiento técnico para mantener la infraestructura operativa.</p></div></div></div></div></section>
+<section class="services section-space" id="servicios" aria-labelledby="services-title"><div class="shell services-layout"><div data-reveal><p class="eyebrow">Servicios NODAXIS</p><h2 id="services-title">Instalación, configuración y soporte de red.</h2><p>Cuéntanos cómo está conectado tu espacio y qué necesitas mejorar. Revisamos el alcance contigo.</p><a class="button button-outline" href="{{ url('/cotizar') }}">Solicitar cotización</a></div><div class="service-list"><div class="service-row" data-reveal><span>01</span><div><h3>Diseño e instalación</h3><p>Definición de puntos de red, equipos y cableado para el sitio.</p></div></div><div class="service-row" data-reveal><span>02</span><div><h3>Configuración de red</h3><p>Revisión de enlaces, accesos y separación de redes.</p></div></div><div class="service-row" data-reveal><span>03</span><div><h3>Soporte y mantenimiento</h3><p>Atención a cambios y necesidades técnicas de la infraestructura.</p></div></div></div></div></section>
 
-<section class="about-cta section-space" id="nosotros" aria-labelledby="about-title"><div class="shell about-inner" data-reveal><div><p class="eyebrow">NODAXIS</p><h2 id="about-title">Tecnología que se entiende. Redes que trabajan.</h2></div><div><p>Hacemos que una necesidad técnica se convierta en un proyecto claro: qué se quiere conectar, dónde y para quién. La cotización parte de esos datos, sin prometer productos ni condiciones que aún no se han confirmado.</p><a class="button button-primary" href="{{ url('/cotizar') }}">Cuéntanos qué necesitas</a></div></div></section>
+<section class="about-cta section-space" id="nosotros" aria-labelledby="about-title"><div class="shell about-inner" data-reveal><div><p class="eyebrow">NODAXIS · El Salvador</p><h2 id="about-title">Tu red empieza con una conversación técnica.</h2></div><div><p>Nos compartes el lugar, los equipos y el problema que quieres resolver. Con esa información revisamos qué instalación y componentes convienen cotizar.</p><a class="button button-primary" href="{{ url('/cotizar') }}">Cuéntanos qué necesitas</a></div></div></section>
 @endsection

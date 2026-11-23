@@ -98,10 +98,10 @@ if (hologram) {
     }
     const nodes = [...hologram.querySelectorAll('[data-holo-node]')];
     const detail = {
-        sede: { index: '01 / SEDE', title: 'Una base para conectar.', copy: 'La ubicación y la cantidad de usuarios orientan la distribución de la red.', quote: '/cotizar?categoria=redes' },
-        wifi: { index: '02 / WI-FI', title: 'Cobertura donde se necesita.', copy: 'Los espacios y la demanda de conexión definen los puntos de acceso.', quote: '/cotizar?categoria=wifi' },
-        equipos: { index: '03 / EQUIPOS', title: 'Componentes con propósito.', copy: 'Switches, enlaces y cableado se seleccionan según el alcance del proyecto.', quote: '/cotizar?categoria=equipos' },
-        control: { index: '04 / CONTROL', title: 'Acceso según tu operación.', copy: 'El enrutamiento y los controles perimetrales se plantean para el entorno real.', quote: '/cotizar?categoria=seguridad' },
+        sede: { index: 'SEDE', title: 'El lugar de instalación', copy: 'La distribución de las áreas ayuda a definir recorridos de cable y cobertura Wi-Fi.', quote: '/cotizar?categoria=redes' },
+        wifi: { index: 'WI-FI', title: 'Puntos de acceso', copy: 'La ubicación y la cantidad de personas ayudan a estimar dónde se necesita señal.', quote: '/cotizar?categoria=wifi' },
+        equipos: { index: 'EQUIPOS', title: 'Switches y conexiones', copy: 'Los puertos y enlaces dependen de cuántos equipos deban conectarse.', quote: '/cotizar?categoria=equipos' },
+        control: { index: 'ROUTER Y FIREWALL', title: 'Conexión a internet', copy: 'Revisamos los enlaces y los accesos que necesita administrar la empresa.', quote: '/cotizar?categoria=seguridad' },
     };
     const select = (node, focus = false) => {
         const key = node.dataset.holoNode;
@@ -133,9 +133,9 @@ if (hologram) {
 const showcase = document.querySelector('[data-showcase]');
 if (showcase) {
     const modes = {
-        redes: { title: 'Redes empresariales', copy: 'Conecta áreas, equipos y usuarios con una arquitectura pensada para crecer.', image: '/assets/catalog/switch.webp', alt: 'Representación conceptual de un switch empresarial genérico', quote: '/cotizar?categoria=redes' },
-        wifi: { title: 'Cobertura Wi-Fi', copy: 'Planifica la conectividad inalámbrica según espacios, usuarios y demanda.', image: '/assets/catalog/wifi.webp', alt: 'Representación conceptual de un punto de acceso Wi-Fi genérico', quote: '/cotizar?categoria=wifi' },
-        seguridad: { title: 'Seguridad perimetral', copy: 'Define el enrutamiento y los controles de acceso para tu operación.', image: '/assets/catalog/firewall.webp', alt: 'Representación conceptual de un firewall genérico', quote: '/cotizar?categoria=seguridad' },
+        redes: { title: 'Red cableada', copy: 'Conecta computadoras, impresoras y otros equipos por cable.', image: '/assets/catalog/switch.webp', alt: 'Imagen conceptual de un switch para redes empresariales', quote: '/cotizar?categoria=redes' },
+        wifi: { title: 'Wi-Fi para tus áreas de trabajo', copy: 'La ubicación de los puntos de acceso depende del espacio y de cuántas personas se conectan.', image: '/assets/catalog/wifi.webp', alt: 'Imagen conceptual de puntos de acceso Wi-Fi', quote: '/cotizar?categoria=wifi' },
+        seguridad: { title: 'Router y firewall', copy: 'Administra los enlaces a internet y las reglas de acceso de tu red.', image: '/assets/catalog/firewall.webp', alt: 'Imagen conceptual de un equipo router y firewall', quote: '/cotizar?categoria=seguridad' },
     };
     const buttons = [...showcase.querySelectorAll('.experience-tab')];
     const image = showcase.querySelector('[data-stage-image]');
@@ -249,7 +249,7 @@ if (catalog) {
             featureImage.alt = `Representación conceptual de ${tab.dataset.featureName.toLowerCase()}`;
             featureTitle.textContent = tab.dataset.featureName;
             featureCopy.textContent = tab.dataset.featureSummary;
-            featureGroup.textContent = `${tab.dataset.featureGroupName} / ${String(next + 1).padStart(2, '0')}`;
+            featureGroup.textContent = tab.dataset.featureGroupName;
             featureAdd.dataset.quoteItem = tab.dataset.featureTab;
             featureAdd.dispatchEvent(new Event('catalog:selection-sync'));
             if (!reduceMotion.matches) gsap.fromTo(featureImage, { opacity: 0 }, { opacity: 1, duration: .65, ease: 'power3.out', overwrite: true });
