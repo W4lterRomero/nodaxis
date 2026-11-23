@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  pages: read
 
 concurrency:
   group: github-pages
@@ -36,6 +37,7 @@ jobs:
           PAGES_URL: https://w4lterromero.github.io
           PAGES_BASE_PATH: /nodaxis/
         run: |
+          cp .env.example .env
           touch database/database.sqlite
           php artisan key:generate --force
           php artisan serve --host=127.0.0.1 --port=8000 > /tmp/nodaxis-laravel.log 2>&1 &
