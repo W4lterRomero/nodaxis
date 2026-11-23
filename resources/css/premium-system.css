@@ -88,8 +88,19 @@ p{font-size:1rem;line-height:1.65}
 .hologram-heading h2,.solutions .section-heading h2{font-size:clamp(2.7rem,4.6vw,4.45rem);line-height:1.04;letter-spacing:-.035em}
 .hologram-heading>p:last-child{margin:0;max-width:670px;font-size:1rem;line-height:1.65}
 .hologram-stage{border:1px solid #d1dce6;border-radius:20px;background:#fff;box-shadow:var(--elevation-soft)}
-.hologram-visual{background:linear-gradient(145deg,#f9fbfd,#ebf3f8)}
-.holo-mobile-diagram{display:none}
+.hologram-stage::before{height:1px;background:linear-gradient(90deg,transparent,#75b6e9,transparent);box-shadow:none;animation:none;opacity:.85}
+.hologram-visual{height:clamp(430px,48vw,640px);background:#0b1722}
+.hologram-photo{position:absolute;inset:-1%;width:102%;height:102%;object-fit:cover;object-position:center 48%;transform:translate3d(var(--photo-x,0px),var(--photo-y,0px),0) scale(var(--photo-scale,1.02));transition:transform .7s cubic-bezier(.2,.7,.2,1),object-position .7s cubic-bezier(.2,.7,.2,1);will-change:transform}
+.hologram-visual:hover .hologram-photo{--photo-scale:1.055}
+.hologram-stage[data-active="sede"] .hologram-photo{object-position:26% 35%;--photo-scale:1.04}
+.hologram-stage[data-active="wifi"] .hologram-photo{object-position:29% 4%;--photo-scale:1.12}
+.hologram-stage[data-active="equipos"] .hologram-photo{object-position:58% 44%;--photo-scale:1.08}
+.hologram-stage[data-active="control"] .hologram-photo{object-position:88% 43%;--photo-scale:1.12}
+.hologram-photo-shade{position:absolute;inset:0;background:linear-gradient(90deg,#0716249c 0%,#07162435 34%,transparent 66%),linear-gradient(0deg,#071624bd 0%,transparent 40%);pointer-events:none}
+.hologram-photo-caption{position:absolute;right:28px;bottom:25px;left:30px;display:flex;align-items:end;justify-content:space-between;gap:18px;color:#fff}
+.hologram-photo-caption-main{display:flex;align-items:center;gap:11px;font-size:clamp(1rem,1.45vw,1.3rem);font-weight:700;letter-spacing:-.02em;text-shadow:0 2px 14px #071624b8}
+.hologram-photo-dot{width:9px;height:9px;flex:none;border-radius:50%;background:#54e0d8;box-shadow:0 0 0 5px #54e0d826,0 0 20px #54e0d8a8}
+.hologram-photo-caption-note{max-width:345px;padding:9px 11px;border:1px solid #ffffff42;border-radius:6px;background:#0716248c;color:#e4edf4;font-size:.72rem;line-height:1.4;text-align:right;backdrop-filter:blur(8px)}
 .hologram-detail p{font-size:.96rem;line-height:1.6}
 .catalog{background:#f1f5f8}
 .catalog-heading{margin-bottom:38px}
@@ -183,6 +194,7 @@ body:has(.site-header.is-scrolled) .incentive-float{opacity:0;visibility:hidden;
     .showcase-heading .eyebrow,.showcase-heading h2,.showcase-heading>p:last-child{grid-column:auto;grid-row:auto}
     .showcase-heading>p:last-child{margin:0;max-width:620px}
     .hologram-heading{margin-inline:auto}
+    .hologram-visual{height:clamp(350px,55vw,470px)}
     .solution-grid{grid-template-columns:1fr 1fr;grid-template-rows:none}
     .solution-card{display:grid;grid-template-rows:minmax(210px,1fr) auto;min-height:0}
     .solution-card-dark{grid-column:1/-1;grid-row:auto;min-height:430px}
@@ -223,16 +235,11 @@ body:has(.site-header.is-scrolled) .incentive-float{opacity:0;visibility:hidden;
     .hologram-svg{width:100%;transform:none}
     .hologram-node b{font-size:.82rem}
     .hologram-detail p{font-size:.92rem}
-    .hologram-visual{height:auto;min-height:0;padding:16px}
-    .hologram-svg{display:none}
-    .holo-mobile-diagram{display:grid;gap:6px}
-    .holo-mobile-node{display:flex;min-height:42px;align-items:center;gap:10px;padding:9px 11px;border:1px solid #cbd9e4;border-radius:7px;background:#fff;color:#173149;font-size:.79rem;line-height:1.25}
-    .holo-mobile-node>span{flex:none;color:#1268d5;font-size:.68rem;font-weight:700;letter-spacing:.05em}
-    .holo-mobile-node b{font-weight:700}
-    .holo-mobile-arrow{height:13px;color:#668196;font-size:.85rem;line-height:1;text-align:center}
-    .holo-mobile-branch{padding:2px 0 4px;color:#53697c;font-size:.72rem;text-align:center}
-    .holo-mobile-endpoints{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-    .holo-mobile-endpoints .holo-mobile-node:last-child{grid-column:1/-1}
+    .hologram-visual{height:255px;padding:0}
+    .hologram-photo{object-position:58% 48%;transform:scale(1.02)}
+    .hologram-photo-caption{right:13px;bottom:13px;left:14px;display:block}
+    .hologram-photo-caption-main{font-size:.9rem}
+    .hologram-photo-caption-note{display:table;margin-top:7px;padding:6px 8px;font-size:.65rem;text-align:left}
     .catalog-feature-body{grid-template-columns:1fr}
     .catalog-feature-copy{padding:28px 20px 6px}
     .catalog-feature-copy h3{font-size:clamp(2.25rem,10vw,3.1rem)}

@@ -90,10 +90,10 @@ const hologram = document.querySelector('[data-hologram]');
 if (hologram) {
     const nodes = [...hologram.querySelectorAll('[data-holo-node]')];
     const detail = {
-        sede: { index: 'SEDE', title: 'Cada espacio, pensado para trabajar', copy: 'Paredes, distancias y distribución influyen en cómo llega la red a cada área. Cuéntanos cómo es tu espacio y lo revisamos contigo.', quote: '/cotizar?categoria=redes' },
-        wifi: { index: 'WI-FI', title: 'Que la señal llegue donde hace falta', copy: 'La ubicación de los puntos de acceso se define según las áreas, los obstáculos y las personas que usan la red.', quote: '/cotizar?categoria=wifi' },
-        equipos: { index: 'EQUIPOS', title: 'Cada puesto listo para avanzar', copy: 'Computadoras, impresoras y otros dispositivos dependen de conexiones bien ubicadas. Revisamos qué usa cada área antes de definir los puntos.', quote: '/cotizar?categoria=equipos' },
-        control: { index: 'ROUTER Y FIREWALL', title: 'Más claridad sobre tu conexión', copy: 'El router conecta la red a internet y el firewall ayuda a administrar el tráfico y los accesos.', quote: '/cotizar?categoria=seguridad' },
+        sede: { index: 'SEDE', title: 'Cada espacio, pensado para trabajar', copy: 'Paredes, distancias y distribución influyen en cómo llega la red a cada área. Cuéntanos cómo es tu espacio y lo revisamos contigo.', caption: 'El espacio donde trabaja tu equipo', quote: '/cotizar?categoria=redes' },
+        wifi: { index: 'WI-FI', title: 'Que la señal llegue donde hace falta', copy: 'La ubicación de los puntos de acceso se define según las áreas, los obstáculos y las personas que usan la red.', caption: 'Una señal pensada para acompañar el trabajo', quote: '/cotizar?categoria=wifi' },
+        equipos: { index: 'EQUIPOS', title: 'Cada puesto listo para avanzar', copy: 'Computadoras, impresoras y otros dispositivos dependen de conexiones bien ubicadas. Revisamos qué usa cada área antes de definir los puntos.', caption: 'Cada puesto, conectado para avanzar', quote: '/cotizar?categoria=equipos' },
+        control: { index: 'ROUTER Y FIREWALL', title: 'Más claridad sobre tu conexión', copy: 'El router conecta la red a internet y el firewall ayuda a administrar el tráfico y los accesos.', caption: 'Una conexión más clara y administrable', quote: '/cotizar?categoria=seguridad' },
     };
     const select = (node, focus = false) => {
         const key = node.dataset.holoNode;
@@ -108,6 +108,7 @@ if (hologram) {
         hologram.querySelector('[data-holo-index]').textContent = data.index;
         hologram.querySelector('[data-holo-title]').textContent = data.title;
         hologram.querySelector('[data-holo-copy]').textContent = data.copy;
+        hologram.querySelector('[data-holo-visual-caption]').textContent = data.caption;
         hologram.querySelector('[data-holo-link]').href = siteHref(data.quote);
         if (focus) node.focus();
     };
@@ -120,6 +121,22 @@ if (hologram) {
             select(nodes[next], true);
         });
     });
+    const visual = hologram.querySelector('.hologram-visual');
+    const photo = hologram.querySelector('.hologram-photo');
+    if (visual && photo && !reduceMotion.matches) {
+        visual.addEventListener('pointermove', event => {
+            if (event.pointerType === 'touch') return;
+            const bounds = visual.getBoundingClientRect();
+            const x = (event.clientX - bounds.left) / bounds.width - .5;
+            const y = (event.clientY - bounds.top) / bounds.height - .5;
+            photo.style.setProperty('--photo-x', `${-x * 8}px`);
+            photo.style.setProperty('--photo-y', `${-y * 6}px`);
+        });
+        visual.addEventListener('pointerleave', () => {
+            photo.style.setProperty('--photo-x', '0px');
+            photo.style.setProperty('--photo-y', '0px');
+        });
+    }
 }
 
 const showcase = document.querySelector('[data-showcase]');
