@@ -8,7 +8,7 @@
     <title>@yield('title', 'NODAXIS | Ingeniería de redes en El Salvador')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="{{ request()->routeIs('quotes.create') ? 'page-quote' : '' }}">
 <a class="skip-link" href="#contenido">Ir al contenido</a>
 <header class="site-header" id="inicio">
     <div class="header-inner shell">
@@ -35,18 +35,7 @@
     <div class="header-progress" aria-hidden="true"><span data-scroll-progress></span></div>
 </header>
 <aside class="incentive-ribbon" aria-label="Beneficios NODAXIS">
-    <div class="incentive-ribbon-track">
-        <a href="{{ url('/#afiliados') }}"><span class="incentive-dot" aria-hidden="true"></span>Recomienda un proyecto y conoce el programa de afiliados · <strong>10%</strong></a>
-        <span class="incentive-separator" aria-hidden="true">✳</span>
-        <a href="{{ url('/#boletin') }}">Recibe guías prácticas de redes en <strong>Pulso de red</strong></a>
-        <span class="incentive-separator" aria-hidden="true">✳</span>
-    </div>
-    <div class="incentive-ribbon-track" aria-hidden="true">
-        <a tabindex="-1" href="{{ url('/#afiliados') }}"><span class="incentive-dot"></span>Recomienda un proyecto y conoce el programa de afiliados · <strong>10%</strong></a>
-        <span class="incentive-separator">✳</span>
-        <a tabindex="-1" href="{{ url('/#boletin') }}">Recibe guías prácticas de redes en <strong>Pulso de red</strong></a>
-        <span class="incentive-separator">✳</span>
-    </div>
+    <a class="incentive-ribbon-message" href="{{ url('/#afiliados') }}"><span class="incentive-dot" aria-hidden="true"></span>¿Recomiendas proyectos de redes? Conoce el programa de afiliados · <strong>10%</strong> · Consulta condiciones <span aria-hidden="true">→</span></a>
 </aside>
 <main id="contenido">@yield('content')</main>
 <footer class="site-footer">

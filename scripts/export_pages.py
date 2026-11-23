@@ -35,12 +35,20 @@ def staticize(html: str) -> str:
         html,
         flags=re.S,
     )
-    html = re.sub(
-        r'<form class="quote-form".*?</form>',
-        '<div class="quote-form static-quote"><h2>Cuéntanos sobre tu proyecto</h2><p>Para solicitar una cotización, escríbenos con tu empresa, ubicación y lo que necesitas conectar.</p><div class="static-quote-actions"><a class="button button-primary" href="https://wa.me/50372311719?text=Hola%2C%20quiero%20solicitar%20una%20cotizaci%C3%B3n%20de%20redes.">Continuar por WhatsApp</a><a href="mailto:ac23014@ues.edu.sv?subject=Solicitud%20de%20cotizaci%C3%B3n%20NODAXIS">Enviar correo</a></div></div>',
-        html,
-        flags=re.S,
-    )
+    def make_static_quote(match: re.Match[str]) -> str:
+        form = match.group(0)
+        form = re.sub(r'<form class="quote-form"[^>]*>', '<form class="quote-form" data-static-quote novalidate>', form, count=1)
+        form = re.sub(r'\s*<input[^>]+name="_token"[^>]*>', '', form)
+        form = re.sub(
+            r'<div class="form-submit">.*?</div>\s*</div>',
+            '<div class="form-submit"><p>Completa los datos y elige dónde enviar tu solicitud. Podrás revisarla antes de enviarla.</p><div class="quote-contact-actions"><button class="button button-primary" type="button" data-quote-channel="whatsapp">Continuar por WhatsApp <span aria-hidden="true">↗</span></button><button class="quote-email-link" type="button" data-quote-channel="email">Enviar por correo</button></div></div>',
+            form,
+            count=1,
+            flags=re.S,
+        )
+        return form
+
+    html = re.sub(r'<form class="quote-form".*?</form>', make_static_quote, html, flags=re.S)
     html = re.sub(
         r'<form class="unsubscribe-form".*?</form>',
         '<div class="unsubscribe-form"><h2>Cancelar suscripción</h2><p>Escríbenos desde el correo que deseas retirar de Pulso de red.</p><a href="mailto:ac23014@ues.edu.sv?subject=Cancelar%20suscripci%C3%B3n%20Pulso%20de%20red">Solicitar baja por correo</a></div>',

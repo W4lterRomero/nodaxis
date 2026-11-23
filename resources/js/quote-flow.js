@@ -151,6 +151,40 @@ if (form) {
             }
         });
 
+        const channelButtons = [...form.querySelectorAll('[data-quote-channel]')];
+        const fieldValue = name => String(form.elements.namedItem(name)?.value || '').trim();
+        const contactMessage = () => {
+            const interests = selectedLabels('intereses') || 'Sin equipos específicos por ahora';
+            return [
+                'Hola, quiero solicitar una cotización de NODAXIS.',
+                '',
+                `Organización: ${fieldValue('empresa')}`,
+                `Ubicación: ${fieldValue('ubicacion')}`,
+                `Necesito: ${selectedLabels('categorias')}`,
+                `Equipos de interés: ${interests}`,
+                `Proyecto: ${fieldValue('mensaje')}`,
+                `Contacto: ${fieldValue('nombre')}`,
+                `Correo: ${fieldValue('email')}`,
+                `Teléfono: ${fieldValue('telefono') || 'No indicado'}`,
+            ].join('\n');
+        };
+        channelButtons.forEach(button => button.addEventListener('click', () => {
+            for (let index = 0; index < panels.length; index++) {
+                if (!validateStep(index)) {
+                    showStep(index, true);
+                    validateStep(index);
+                    return;
+                }
+            }
+            const message = contactMessage();
+            if (button.dataset.quoteChannel === 'whatsapp') {
+                window.open(`https://wa.me/50372311719?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+            } else {
+                const subject = encodeURIComponent('Solicitud de cotización NODAXIS');
+                window.location.href = `mailto:ac23014@ues.edu.sv?subject=${subject}&body=${encodeURIComponent(message)}`;
+            }
+        }));
+
         const serverErrorStep = panels.findIndex(panel => panel.querySelector('[aria-invalid="true"]'));
         const categoryError = [...group.querySelectorAll('small:not(.group-error)')].length > 0;
         form.classList.add('is-guided');
