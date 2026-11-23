@@ -19,7 +19,7 @@
 <section class="quote-hero shell"><a class="back-link" href="{{ url('/') }}">← Volver al inicio</a><p class="eyebrow">Hablemos de tu proyecto</p><h1>Tu siguiente red<br><em>comienza aquí.</em></h1><p>Cuéntanos lo necesario para preparar una propuesta técnica y comercial adaptada a tu espacio.</p></section>
 <section class="quote-section shell"><div class="quote-aside"><div class="aside-card"><p class="micro-label">QUÉ SUCEDE DESPUÉS</p><div class="aside-step"><span>01</span><p>Recibimos los datos de tu necesidad.</p></div><div class="aside-step"><span>02</span><p>Revisamos el alcance y las condiciones del sitio.</p></div><div class="aside-step"><span>03</span><p>Te contactamos para completar la información y preparar la cotización.</p></div><div class="aside-rule"></div><p class="aside-contact">También puedes escribir a <a href="mailto:ac23014@ues.edu.sv">ac23014@ues.edu.sv</a> o llamar por <a href="https://wa.me/50372311719">WhatsApp</a>.</p></div></div>
     <div class="quote-form-wrap">
-        @if(session('quote_success'))<div class="form-success" role="status"><strong>Solicitud registrada.</strong><span>Gracias. Tu información quedó guardada en esta versión local del sitio.</span></div>@endif
+        @if(session('quote_success'))<div class="form-success" role="status"><strong>Solicitud registrada.</strong><span>Gracias por compartir los detalles de tu proyecto. Nos pondremos en contacto contigo.</span></div>@endif
         @if($errors->any())<div class="form-errors" role="alert"><strong>Revisa los campos marcados.</strong><span>Falta información necesaria para registrar la solicitud.</span></div>@endif
         <form class="quote-form" action="{{ route('quotes.store') }}" method="post" novalidate>
             @csrf
@@ -35,7 +35,7 @@
             <label class="quote-privacy-consent"><input type="checkbox" name="privacy_consent" value="1" required @checked(old('privacy_consent')) @error('privacy_consent') aria-describedby="error-privacy-consent" @enderror><span>Acepto que NODAXIS use estos datos para responder esta solicitud. Leí el <a href="{{ route('terms') }}" target="_blank" rel="noopener">aviso de privacidad y los términos</a>.</span></label>
             @error('privacy_consent')<small id="error-privacy-consent" class="quote-consent-error" role="alert">Debes aceptar el aviso de privacidad para registrar la solicitud.</small>@enderror
             <div class="honeypot" aria-hidden="true"><label for="website">Sitio web</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-            <div class="form-submit"><p>Los campos marcados con * son obligatorios. En este prototipo local, la solicitud se guarda en la base de datos del equipo.</p><button class="button button-primary" type="submit">Registrar solicitud</button></div>
+            <div class="form-submit"><p>Los campos marcados con * son obligatorios.</p><button class="button button-primary" type="submit">Solicitar cotización</button></div>
         </form>
     </div>
 </section>

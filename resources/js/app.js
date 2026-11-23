@@ -29,7 +29,7 @@ if (mega) {
     const open = () => { trigger.setAttribute('aria-expanded', 'true'); panel.hidden = false; };
     trigger.addEventListener('click', () => trigger.getAttribute('aria-expanded') === 'true' ? close() : open());
     mega.querySelectorAll('[data-mega-item]').forEach(item => {
-        const preview = () => { image.src = item.dataset.megaImage; image.alt = `Representación conceptual de ${item.dataset.megaName}`; title.textContent = item.dataset.megaName; copy.textContent = item.dataset.megaSummary; };
+        const preview = () => { image.src = item.dataset.megaImage; image.alt = item.dataset.megaName; title.textContent = item.dataset.megaName; copy.textContent = item.dataset.megaSummary; };
         item.addEventListener('mouseenter', preview);
         item.addEventListener('focus', preview);
     });
@@ -147,9 +147,9 @@ if (hologram) {
 const showcase = document.querySelector('[data-showcase]');
 if (showcase) {
     const modes = {
-        redes: { title: 'Red cableada', copy: 'Conecta computadoras, impresoras y otros equipos por cable.', image: '/assets/catalog/switch.webp', alt: 'Imagen conceptual de un switch para redes empresariales', quote: '/cotizar?categoria=redes' },
-        wifi: { title: 'Wi-Fi para tus áreas de trabajo', copy: 'La ubicación de los puntos de acceso depende del espacio y de cuántas personas se conectan.', image: '/assets/catalog/wifi.webp', alt: 'Imagen conceptual de puntos de acceso Wi-Fi', quote: '/cotizar?categoria=wifi' },
-        seguridad: { title: 'Router y firewall', copy: 'Administra los enlaces a internet y las reglas de acceso de tu red.', image: '/assets/catalog/firewall.webp', alt: 'Imagen conceptual de un equipo router y firewall', quote: '/cotizar?categoria=seguridad' },
+        redes: { title: 'Red cableada', copy: 'Conecta computadoras, impresoras y otros equipos por cable.', image: '/assets/catalog/switch.webp', alt: 'Switch para redes empresariales', quote: '/cotizar?categoria=redes' },
+        wifi: { title: 'Wi-Fi para tus áreas de trabajo', copy: 'Conecta a tu equipo con cobertura Wi-Fi en sus áreas de trabajo.', image: '/assets/catalog/wifi.webp', alt: 'Punto de acceso Wi-Fi empresarial', quote: '/cotizar?categoria=wifi' },
+        seguridad: { title: 'Router y firewall', copy: 'Administra los enlaces a internet y las reglas de acceso de tu red.', image: '/assets/catalog/firewall.webp', alt: 'Router y firewall para seguridad de red', quote: '/cotizar?categoria=seguridad' },
     };
     const buttons = [...showcase.querySelectorAll('.experience-tab')];
     const image = showcase.querySelector('[data-stage-image]');
@@ -255,7 +255,7 @@ if (catalog) {
         featurePanel.setAttribute('aria-labelledby', tab.id);
         const update = () => {
             featureImage.src = tab.dataset.featureImageSrc;
-            featureImage.alt = `Imagen ilustrativa de ${tab.dataset.featureName.toLowerCase()}`;
+            featureImage.alt = tab.dataset.featureName;
             featureTitle.textContent = tab.dataset.featureName;
             featureCopy.textContent = tab.dataset.featureSummary;
             featureGroup.textContent = tab.dataset.featureGroupName;

@@ -24,7 +24,7 @@
                             <a href="{{ url('/cotizar?intereses='.$slug) }}" data-mega-item="{{ $slug }}" data-mega-name="{{ $item['name'] }}" data-mega-summary="{{ $item['summary'] }}" data-mega-image="{{ asset('assets/catalog/'.$item['image']) }}">{{ $item['name'] }}</a>
                         @endforeach
                     </div>
-                    <div class="nav-mega-preview" aria-live="polite"><img src="{{ asset('assets/catalog/switch.webp') }}" alt="Imagen ilustrativa de switches" data-mega-preview-image><div><span class="micro-label">EXPLORAR EQUIPOS</span><h2 data-mega-preview-title>Switches</h2><p data-mega-preview-copy>Conecta por cable computadoras, impresoras y puntos de acceso.</p><a href="{{ url('/#catalogo') }}">Ver catálogo</a></div></div>
+                    <div class="nav-mega-preview" aria-live="polite"><img src="{{ asset('assets/catalog/switch.webp') }}" alt="Switches de red" data-mega-preview-image><div><span class="micro-label">EXPLORAR EQUIPOS</span><h2 data-mega-preview-title>Switches</h2><p data-mega-preview-copy>Conecta por cable computadoras, impresoras y puntos de acceso.</p><a href="{{ url('/#catalogo') }}">Ver catálogo</a></div></div>
                 </div>
             </div>
             <a data-nav-link href="{{ url('/#servicios') }}">Servicios</a>
@@ -55,7 +55,7 @@
         <div><p class="footer-title">Explorar</p><a href="{{ url('/#soluciones') }}">Soluciones</a><a href="{{ url('/#arquitectura') }}">Arquitectura</a><a href="{{ url('/#catalogo') }}">Equipos</a><a href="{{ url('/#servicios') }}">Servicios</a><a href="{{ url('/#afiliados') }}">Afiliados · 10%</a><a href="{{ url('/#boletin') }}">Pulso de red</a></div>
         <div class="footer-contact"><p class="footer-title">Contacto</p><a href="{{ url('/cotizar') }}">Solicitar cotización</a><a href="https://wa.me/50372311719" target="_blank" rel="noopener">WhatsApp · +503 7231 1719</a><a href="mailto:ac23014@ues.edu.sv">ac23014@ues.edu.sv</a><a href="mailto:rh23015@ues.edu.sv">rh23015@ues.edu.sv</a><a href="mailto:rg22023@ues.edu.sv">rg22023@ues.edu.sv</a><p>El Salvador</p></div>
     </div>
-    <div class="shell footer-bottom"><span>© {{ date('Y') }} NODAXIS · El Salvador</span><div><a href="{{ route('terms') }}">Términos y privacidad</a><span>Equipos y modelos sujetos a confirmación</span></div></div>
+    <div class="shell footer-bottom"><span>© {{ date('Y') }} NODAXIS · El Salvador</span><div><a href="{{ route('terms') }}">Términos y privacidad</a></div></div>
 </footer>
 <aside class="incentive-float" data-incentive-float aria-label="Programa de afiliados NODAXIS">
     <span class="incentive-float-mark" aria-hidden="true">10%</span>

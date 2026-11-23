@@ -31,7 +31,7 @@ def staticize(html: str) -> str:
 
     html = re.sub(
         r'<form class="newsletter-form".*?</form>',
-        lambda m: replace_form(m, '<div class="newsletter-form newsletter-static"><p>En esta versión estática, solicita la guía por correo y te responderemos directamente.</p><a class="button button-primary" href="mailto:ac23014@ues.edu.sv?subject=Pulso%20de%20red">Quiero recibir Pulso de red</a><small>Al escribirnos, puedes consultar el <a href="' + PAGES + BASE_PATH + 'terminos/">aviso de privacidad</a>.</small></div>'),
+        lambda m: replace_form(m, '<div class="newsletter-form newsletter-static"><p>Recibe guías prácticas sobre redes, Wi-Fi y seguridad. Escríbenos para suscribirte a Pulso de red.</p><a class="button button-primary" href="mailto:ac23014@ues.edu.sv?subject=Pulso%20de%20red">Quiero recibir Pulso de red</a><small>Al escribirnos, puedes consultar el <a href="' + PAGES + BASE_PATH + 'terminos/">aviso de privacidad</a>.</small></div>'),
         html,
         flags=re.S,
     )
