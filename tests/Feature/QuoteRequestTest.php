@@ -27,6 +27,7 @@ class QuoteRequestTest extends TestCase
             'mensaje' => 'Necesitamos mejorar la red de nuestra oficina.',
             'categorias' => ['redes', 'wifi'],
             'intereses' => ['switches', 'access-points'],
+            'privacy_consent' => '1',
             'website' => '',
         ];
     }
