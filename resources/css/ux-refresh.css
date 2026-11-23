@@ -1,5 +1,6 @@
 /* Clear, product-led layouts for the catalogue and service sections. */
 .shell{width:min(calc(100% - 64px),1360px)}
+.architecture,.catalog,.services,.affiliate,.newsletter,.about-cta{scroll-margin-top:90px}
 .catalog{background:#fff}
 .catalog-heading{align-items:end;margin-bottom:30px}
 .catalog-heading h2{max-width:760px}
